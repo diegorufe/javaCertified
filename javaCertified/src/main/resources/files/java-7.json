@@ -1,0 +1,17 @@
+{
+	"questions" : [
+			{
+				"text" : "prueba",
+				"answers" :[
+					{
+						"text": "prueba 1",
+						"index": 1
+					},
+					{
+						"text": "prueba 2",
+						"index": 2
+					}],
+				"indexSuccesQuestion" : 1
+			}
+		]
+}
