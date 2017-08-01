@@ -19,12 +19,6 @@ public class Answer implements Serializable {
 		super();
 	}
 
-	public Answer(String text, int index) {
-		super();
-		this.text = text;
-		this.index = index;
-	}
-
 	public String getText() {
 		return text;
 	}

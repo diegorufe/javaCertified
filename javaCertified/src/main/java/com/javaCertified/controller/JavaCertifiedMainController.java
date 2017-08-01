@@ -19,7 +19,7 @@ public class JavaCertifiedMainController implements IController {
 	public void resolveMasterOption(int option) {
 		switch (option) {
 		case 1:
-
+			new JavaCertified7Controller().run();
 			break;
 		case EXIT_MENU_MASTER_OPTION:
 			menuMasteroption = EXIT_MENU_MASTER_OPTION;

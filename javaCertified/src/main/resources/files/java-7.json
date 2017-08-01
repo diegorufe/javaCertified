@@ -1,17 +1,131 @@
 {
 	"questions" : [
 			{
-				"text" : "prueba",
+				"text" : "Consider the following program:\r\n\r\nclass StrEqual {\r\n\r\n\tpublic static void main(String []args) {\r\n\t\tString s1 = \"hi\";\r\n\t\tString s2 = new String(\"hi\");\r\n\t\tString s3 = \"hi\";\r\n\t \r\n\t\tif(s1 == s2) {\r\n\t\t\tSystem.out.println(\"s1 and s2 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and s2 not equal\");\r\n\t\t}\r\n\t \r\n\t\tif(s1 == s3) {\r\n\t\tSystem.out.println(\"s1 and and s3 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and and s3 not equal\");\r\n\t\t}\r\n\t}\r\n}\r\n",
 				"answers" :[
 					{
-						"text": "prueba 1",
+						"text": "s1 and s2 equal\r\ns1 and s3 equal",
 						"index": 1
 					},
 					{
-						"text": "prueba 2",
+						"text": "s1 and s2 equal\r\ns1 and s3 not equal",
 						"index": 2
-					}],
-				"indexSuccesQuestion" : 1
+					},
+					{
+						"text": "s1 and s2 not equal\r\ns1 and s3 equal",
+						"index": 3
+					},
+					{
+						"text": "s1 and s2 not equal\r\ns1 and s3 not equal",
+						"index": 4
+					}
+				],
+				"indexSuccesQuestion" : 3,
+				"explanation": "JVM sets a constant pool in which it stores all the string constants used in the type. If two references are\r\ndeclared with a constant, then both refer to the same constant object. The == operator checks the similarity of\r\nobjects itself (and not the values in it). Here, the first comparison is between two distinct objects, so we get s1\r\nand s2 not equal. On the other hand, since references of s1 and s3 refer to the same object, we get s1 and\r\ns3 equal."
+			},
+			{
+				"text" : "Consider the following program:\r\n\tclass Point2D {\r\n\t\tprivate int x, y;\r\n\t\tpublic Point2D(int x, int y) {\r\n\t\t\tx = x;\r\n\t\t}\r\n\t \r\n\t\tpublic String toString() {\r\n\t\t\treturn \"[\" + x + \", \" + y + \"]\";\r\n\t\t}\r\n\t\tpublic static void main(String []args) {\r\n\t\t\tPoint2D point = new Point2D(10, 20);\r\n\t\t\tSystem.out.println(point);\r\n\t\t}\r\n}",
+				"answers" :[
+					{
+						"text": "point",
+						"index": 1
+					},
+					{
+						"text": "Point",
+						"index": 2
+					},
+					{
+						"text": "[0, 0]",
+						"index": 3
+					},
+					{
+						"text": "[10, 0]",
+						"index": 4
+					},
+					{
+						"text": "[10, 20]",
+						"index": 5
+					}
+				],
+				"indexSuccesQuestion" : 3,
+				"explanation" : "The assignment x = x; inside the construct reassigns the passed parameter; it does not assign the member\r\nx in Point2D. The correct way to perform the assignment is this.x = x;. Field y is not assigned, so its value\r\nremains 0."
+			},
+			{
+				"text": "class Increment {\r\npublic static void main(String []args) {\r\nInteger i = 10;\r\nInteger j = 11;\r\nInteger k = ++i;\r\n\/\/ INCR\r\nSystem.out.println(\"k == j is \" + (k == j));\r\nSystem.out.println(\"k.equals(j) is \" + k.equals(j));\r\n}\r\n}",
+				"answers" :[
+					{
+						"text": "When executed, this program prints\r\nk == j is false\r\nk.equals(j) is false",
+						"index": 1
+					},
+					{
+						"text": "When executed, this program prints\r\nk == j is true\r\nk.equals(j) is false",
+						"index": 2
+					},
+					{
+						"text": "When executed, this program prints\r\nk == j is false\r\nk.equals(j) is true",
+						"index": 3
+					},
+					{
+						"text": "When executed, this program prints\r\nk == j is true\r\nk.equals(j) is true",
+						"index": 4
+					},
+					{
+						"text": "When compiled, the program will result in a compiler error in the line marked with the comment INCR",
+						"index": 5
+					}
+				],
+				"indexSuccesQuestion" : 4,
+				"explanation": "The Integer objects are immutable objects. If there is an Integer object for a value that already exists, then\r\nit does not create a new object again. In other words, Java uses sharing of immutable Integer objects, so two\r\nInteger objects are equal if their values are equal (no matter if you use == operators to compare the references or\r\nuse equals() method to compare the contents)."
+			},
+			{
+				"text" : "Consider the following program:\r\nclass ArrayCompare {\r\n\tpublic static void main(String []args) {\r\n\t\tint []arr1 = {1, 2, 3, 4, 5};\r\n\t\tint []arr2 = {1, 2, 3, 4, 5};\r\n\t\tSystem.out.println(\"arr1 == arr2 is \" + (arr1 == arr2));\r\n\t\tSystem.out.println(\"arr1.equals(arr2) is \" + arr1.equals(arr2));\r\n\t\tSystem.out.println(\"Arrays.equals(arr1, arr2) is \" +\r\n\t\tjava.util.Arrays.equals(arr1, arr2));\r\n\t}\r\n}",
+				"answers" :[
+					{
+						"text": "arr1 == arr2 is false\r\narr1.equals(arr2) is false\r\nArrays.equals(arr1, arr2) is true",
+						"index": 1
+					},
+					{
+						"text": "arr1 == arr2 is true\r\narr1.equals(arr2) is false\r\nArrays.equals(arr1, arr2) is true",
+						"index": 2
+					},
+					{
+						"text": "arr1 == arr2 is false\r\narr1.equals(arr2) is true\r\nArrays.equals(arr1, arr2) is true",
+						"index": 3
+					},
+					{
+						"text": "arr1 == arr2 is true\r\narr1.equals(arr2) is true\r\nArrays.equals(arr1, arr2) is false",
+						"index": 4
+					},
+					{
+						"text": "arr1 == arr2 is true\r\narr1.equals(arr2) is true\r\nArrays.equals(arr1, arr2) is true",
+						"index": 5
+					}
+				],
+				"indexSuccesQuestion" : 1,
+				"explanation" : "The first comparison between two array objects is carried out using the == operator, which compares object\r\nsimilarity so it returns false here. The equals() method, which compares this array object with the passed array\r\nobject, does not compare values of the array since it is inherited from the Object class. Thus we get another false.\r\nOn the other hand, the Arrays class implements various equals() methods to compare two array objects of\r\ndifferent types; hence we get true from the last invocation."
+			},
+			{
+				"text": "Consider the following program:\r\nclass NullInstanceof {\r\n\tpublic static void main(String []args){\r\n\t\tString str = null;\r\n\t\tif(str instanceof Object){\t \/\/ NULLCHK\r\n\t\t\tSystem.out.println(\"str is Object\");\r\n\t\t}else{\r\n\t\t\tSystem.out.println(\"str is not Object\");\r\n\t\t}\r\n\t}\r\n}",
+				"answers" :[
+					{
+						"text": "This program will result in a compiler error in line marked with comment NULLCHK.",
+						"index": 1
+					},
+					{
+						"text": "This program will result in a NullPointerException in line marked with comment NULLCHK",
+						"index": 2
+					},
+					{
+						"text": "When executed, this program will print the following: str is Object",
+						"index": 3
+					},
+					{
+						"text": "When executed, this program will print the following: str is not Object",
+						"index": 4
+					}
+				],
+				"indexSuccesQuestion" : 4,
+				"explanation" : "The variable str was declared but not instantiated; hence the instanceof operator returns false."
 			}
 		]
 }
