@@ -126,6 +126,125 @@
 				],
 				"indexSuccesQuestion" : 4,
 				"explanation" : "The variable str was declared but not instantiated; hence the instanceof operator returns false."
+			},
+			{
+				"text": "interface Side { String getSide(); }\r\n \r\nclass Head implements Side {\r\n\tpublic String getSide() { return \"Head \"; }\r\n}\r\n \r\nclass Tail implements Side {\r\n\tString getSide() { return \"Tail \"; }\r\n}\r\n\r\nclass Coin {\r\n public static void overload(Head side) { System.out.print(side.getSide()); }\r\n public static void overload(Tail side) { System.out.print(side.getSide()); }\r\n public static void overload(Side side) { System.out.print(\"Side \"); }\r\n public static void overload(Object side) { System.out.print(\"Object \"); }\r\n\r\n public static void main(String []args) {\r\n Side firstAttempt = new Head();\r\n Tail secondAttempt = new Tail();\r\n overload(firstAttempt);\r\n overload((Object)firstAttempt);\r\n overload(secondAttempt);\r\n overload((Side)secondAttempt);\r\n }\r\n}",
+				"answers" :[
+					{
+						"text": "Head Head Tail Tail",
+						"index": 1
+					},
+					{
+						"text": "Side Object Tail Side",
+						"index": 2
+					},
+					{
+						"text": "Head Object Tail Side",
+						"index": 3
+					},
+					{
+						"text": "Side Head Tail Side",
+						"index": 4
+					}
+				],
+				"indexSuccesQuestion" : 2,
+				"explanation" : "Overloading is based on the static type of the objects (while overriding and runtime resolution resolves to the\r\ndynamic type of the objects). Here is how the calls to the overload() method are resolved:\r\n\r\n\u2022\t overload(firstAttempt); --> firstAttempt is of type Side, hence it resolves to\r\noverload(Side).\r\n\u2022\t overload((Object)firstAttempt); -> firstAttempt is casted to Object, hence it resolves to\r\noverload(Object)."
+			},
+			{
+				"text": "Consider the following program:\r\nclass Overloaded {\r\n public static void foo(Integer i) { System.out.println(\"foo(Integer)\"); }\r\n public static void foo(short i) { System.out.println(\"foo(short)\"); }\r\n public static void foo(long i) { System.out.println(\"foo(long)\"); }\r\n public static void foo(int ... i) { System.out.println(\"foo(int ...)\"); }\r\n public static void main(String []args) {\r\n foo(10);\r\n }\r\n}",
+				"answers" :[
+					{
+						"text": "foo(Integer)",
+						"index": 1
+					},
+					{
+						"text": "foo(short)",
+						"index": 2
+					},
+					{
+						"text": "foo(long)",
+						"index": 3
+					},
+					{
+						"text": "foo(int ...)",
+						"index": 4
+					}
+				],
+				"indexSuccesQuestion" : 3,
+				"explanation" : "For an integer literal, the JVM matches in the following order: int, long, Integer, int.... In other words, it\r\nfirst looks for an int type parameter; if it is not provided, then it looks for long type; and so on. Here, since the int\r\ntype parameter is not specified with any overloaded method, it matches with foo(long)."
+			},
+			{
+				"text": "Consider the following program:\r\nclass Base {\r\n public static void foo(Base bObj) {\r\n System.out.println(\"In Base.foo()\");\r\n bObj.bar();\r\n }\r\n \r\n public void bar() {\r\n System.out.println(\"In Base.bar()\");\r\n }\r\n}\r\nclass Derived extends Base {\r\n public static void foo(Base bObj) {\r\n System.out.println(\"In Derived.foo()\");\r\n bObj.bar();\r\n }\r\n public void bar() {\r\n System.out.println(\"In Derived.bar()\");\r\n }\r\n}\r\nclass OverrideTest {\r\n public static void main(String []args) {\r\n Base bObj = new Derived();\r\n bObj.foo(bObj);\r\n }\r\n}",
+				"answers" :[
+					{
+						"text": "In Base.foo() In Base.bar()",
+						"index": 1
+					},
+					{
+						"text": "In Base.foo() In Derived.bar()",
+						"index": 2
+					},
+					{
+						"text": "In Derived.foo() In Base.bar()",
+						"index": 3
+					},
+					{
+						"text": "In Derived.foo() In Derived.bar()",
+						"index": 4
+					}
+				],
+				"indexSuccesQuestion" : 2,
+				"explanation" : "A static method is resolved statically. Inside the static method, a virtual method is invoked, which is resolved\r\ndynamically."
+			},
+			{
+				"text": "class CannotFlyException extends Exception {}\r\ninterface Birdie {\r\n public abstract void fly() throws CannotFlyException;\r\n}\r\ninterface Biped {\r\n public void walk();\r\n}\r\nabstract class NonFlyer {\r\n public void fly() { System.out.print(\"cannot fly \"); } \/\/ LINE A\r\n}\r\n\r\nclass Penguin extends NonFlyer implements Birdie, Biped { \/\/ LINE B\r\n public void walk() { System.out.print(\"walk \"); }\r\n}\r\nclass PenguinTest {\r\n public static void main(String []args) {\r\n Penguin pingu = new Penguin();\r\n pingu.walk();\r\n pingu.fly();\r\n }\r\n}",
+				"answers" :[
+					{
+						"text": "Compiler error in line with comment LINE A because fly() does not declare to throw CannotFlyException.",
+						"index": 1
+					},
+					{
+						"text": "Compiler error in line with comment LINE B because fly() is not defined and hence need to declare it abstract.",
+						"index": 2
+					},
+					{
+						"text": "It crashes after throwing the exception CannotFlyException.",
+						"index": 3
+					},
+					{
+						"text": "When executed, the program prints “walk cannot fly",
+						"index": 4
+					}
+				],
+				"indexSuccesQuestion" : 4,
+				"explanation" : "In order to override a method, it is not necessary for the overridden method to specify an exception. However, if\r\nthe exception is specified, then the specified exception must be the same or a subclass of the specified exception\r\nin the method defined in the super class (or interface)."
+			},
+			{
+				"text": "class TestSwitch {\r\n public static void main(String []args) {\r\n String [] cards = { \"Club\", \"spade\", \" diamond \", \"hearts\" };\r\n for(String card : cards) {\r\n switch(card) {\r\n case \"Club\" : System.out.print(\" club \"); break;\r\n case \"Spade\" : System.out.print(\" spade \"); break;\r\n case \"diamond\" : System.out.print(\" diamond \"); break;\r\n case \"heart\" : System.out.print(\" heart \"); break;\r\n default: System.out.print(\" none \");\r\n }\r\n }\r\n }\r\n}",
+				"answers" :[
+					{
+						"text": "none none none none",
+						"index": 1
+					},
+					{
+						"text": "club none none none",
+						"index": 2
+					},
+					{
+						"text": "club spade none none",
+						"index": 3
+					},
+					{
+						"text": "club spade diamond none",
+						"index": 4
+					},
+					{
+						"text": "club spade diamond heart",
+						"index": 5
+					}
+				],
+				"indexSuccesQuestion" : 2,
+				"explanation" : "Here is the description of matches for the four enumeration values:\r\n\u2022\t \u201Cclub\u201D matches with the case \u201CClub\u201D.\r\n\u2022\t For \u201CSpade\u201D, the case \u201Cspade\u201D does not match because of the case difference (switch case\r\nmatch is case sensitive).\r\n\u2022\t does not match with \u201Cdiamond\u201D because case statements should exactly match and there are\r\nextra whitespaces in the original string.\r\n\u2022\t \u201Chearts\u201D does not match the string \u201Cheart\u201D."
 			}
 		]
 }

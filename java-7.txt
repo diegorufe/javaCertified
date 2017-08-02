@@ -1,1 +1,45 @@
-13 -36
+14 -36
+
+interface Side { String getSide(); }
+ 
+class Head implements Side {
+	public String getSide() { return "Head "; }
+}
+ 
+class Tail implements Side {
+public
+}
+ 
+class Coin {
+public
+public
+public
+public
+ 
+public
+String getSide() { return "Tail "; }
+static
+static
+static
+static
+void
+void
+void
+void
+overload(Head side) {
+overload(Tail side) {
+overload(Side side) {
+overload(Object side)
+System.out.print(side.getSide()); }
+System.out.print(side.getSide()); }
+System.out.print("Side "); }
+{ System.out.print("Object "); }
+static void main(String []args) {
+Side firstAttempt = new Head();
+Tail secondAttempt = new Tail();
+overload(firstAttempt);
+overload((Object)firstAttempt);
+overload(secondAttempt);
+overload((Side)secondAttempt);
+}
+}
