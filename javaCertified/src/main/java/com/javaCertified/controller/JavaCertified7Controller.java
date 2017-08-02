@@ -1,6 +1,7 @@
 package com.javaCertified.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -67,6 +68,7 @@ public class JavaCertified7Controller implements IController {
 			System.exit(0);
 		}
 		List<Question> questions = questionsAnswer.getQuestions();
+		Collections.shuffle(questions);
 		int indexExit = -1;
 		List<Question> responseQuestions = new ArrayList<Question>();
 		System.out.println("Questions for test java certified 7");
@@ -100,13 +102,13 @@ public class JavaCertified7Controller implements IController {
 						question.setSelectAnswer(-1);
 					} else {
 						question.setSelectAnswer(response);
-						if(question.getSelectAnswer() == question.getIndexSuccesQuestion()) {
+						if(question.getAnswers().get(question.getSelectAnswer() - 1).getIndex() == question.getIndexSuccesQuestion()) {
 							System.out.println("The response is succes\n\t"+
 									"Explanation: \n\t\t"+question.getExplanation()+"\n");
 						}else {
 							System.err.println("The response is wrong\n\t"+
 									"Succes answer: \n\t\t"+
-									question.getSuccesAnswer(question.getSelectAnswer()).getText()+"\n"+
+									question.getSuccesAnswer(question.getIndexSuccesQuestion()).getText()+"\n"+
 									"Explanation: \n\t\t"+question.getExplanation()+"\n");
 						}
 					}
@@ -128,7 +130,9 @@ public class JavaCertified7Controller implements IController {
 	public String getTextAnswers(Question question) {
 		String text = "Answers\n\t0 - Exit\n\t";
 		int index = 1;
-		for (Answer answer : question.getAnswers()) {
+		List<Answer> answuers = question.getAnswers();
+		Collections.shuffle(answuers);
+		for (Answer answer : answuers) {
 			text += "" + index + " - " + answer.getText().trim() + "\n\t";
 			index++;
 		}
