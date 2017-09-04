@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">RFJavaCertified</string>
+    <string name="descri_item_java_cerfied">Certificado: </string>
+    <string name="certificado_java7">Certified java 7</string>
+    <string name="certificado_answers">Answers: </string>
+    <string name="certificado_next">Next</string>
+    <string name="certificado_check">Check</string>
+    <string name="certificado_finish">Finish</string>
+    <string name="certificado_succes_answer">Succes answer</string>
+    <string name="certificado_wrong_answer">Wrong answer</string>
+    <string name="certificado_explanation">Explanation</string>
+    <string name="certificado_correct_answer">Correct answer</string>
+    <string name="no_questions">No question load form test</string>
+    <string name="certificado_reload">Repeat</string>
+    <string name="certificado_final_result">Final result</string>
+    <string name="certificado_total_answers">- Total answers</string>
+    <string name="certificado_succes_answers">- Succes answer</string>
+    <string name="certificado_wrong_answers">- Wrong answer</string>
+</resources>

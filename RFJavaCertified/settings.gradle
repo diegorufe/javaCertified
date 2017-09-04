@@ -1,0 +1,3 @@
+include ':app'
+include ':rfMediaMdouleCore'
+project(':rfMediaMdouleCore').projectDir = new File(settingsDir, '../../media/RFAndroid/RFMediaCore/rfMediaModuleCore')
