@@ -6,7 +6,6 @@
     android:layout_height="wrap_content">
 
 
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -64,40 +63,51 @@
                 android:text="@string/certificado_finish" />
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/text_view_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:text="Question"
-            android:textColor="@color/fontColorwhite"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/answers_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:text="@string/certificado_answers"
-            android:textColor="@color/colorToolBarCertified"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/explanation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:text="@string/certificado_answers"
-            android:textColor="@color/colorToolBarCertified"
-            android:textSize="18dp" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-        <RadioGroup
-            android:id="@+id/radio_answers"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"></RadioGroup>
+            <TextView
+                android:id="@+id/text_view_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:text="Question"
+                android:textColor="@color/fontColorwhite"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/answers_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:text="@string/certificado_answers"
+                android:textColor="@color/colorToolBarCertified"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/explanation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:text="@string/certificado_answers"
+                android:textColor="@color/colorToolBarCertified"
+                android:textSize="18dp" />
+
+
+            <RadioGroup
+                android:id="@+id/radio_answers"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></RadioGroup>
+
+        </LinearLayout>
 
 
     </LinearLayout>

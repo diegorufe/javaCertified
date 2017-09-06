@@ -156,10 +156,10 @@ public class JavaCertified7Activity extends AppCompatActivity {
     }
 
     public void next(View view){
+        actualIndexQuestion++;
         if(actualIndexQuestion >= questions.size()){
             this.finish(null);
         }else{
-            actualIndexQuestion++;
             actualQuestion = questions.get(actualIndexQuestion);
             this.loadQuestion();
         }
@@ -179,6 +179,7 @@ public class JavaCertified7Activity extends AppCompatActivity {
     public void finish(View view){
 
         if(this.buttonReload.getVisibility() == View.VISIBLE ){
+            this.setResult(0);
             this.finish();
         }else{
             int succesResponse = 0;

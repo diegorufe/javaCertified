@@ -1,6 +1,7 @@
 package com.rfjavacertified.activitys;
 
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -54,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     @Override
+    public void onBackPressed() {
+        this.finish();
+    }
+
+    @Override
     public void onClick(View view, int position) {
         try {
             ItemListCerfied item = (ItemListCerfied) ((BasicRecicleViewApadter) recyclerView.getAdapter())
@@ -62,8 +68,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 switch (position) {
                     // Java certified 7
                     case 0:
-                        startActivity(new Intent(MainActivity.this, JavaCertified7Activity.class));
-                        this.finish();
+                        startActivityForResult(new Intent(MainActivity.this, JavaCertified7Activity.class),0);
                         break;
                 }
             }
