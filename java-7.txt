@@ -1,45 +1,23 @@
-14 -36
-
-interface Side { String getSide(); }
- 
-class Head implements Side {
-	public String getSide() { return "Head "; }
-}
- 
-class Tail implements Side {
-public
-}
- 
-class Coin {
-public
-public
-public
-public
- 
-public
-String getSide() { return "Tail "; }
-static
-static
-static
-static
-void
-void
-void
-void
-overload(Head side) {
-overload(Tail side) {
-overload(Side side) {
-overload(Object side)
-System.out.print(side.getSide()); }
-System.out.print(side.getSide()); }
-System.out.print("Side "); }
-{ System.out.print("Object "); }
-static void main(String []args) {
-Side firstAttempt = new Head();
-Tail secondAttempt = new Tail();
-overload(firstAttempt);
-overload((Object)firstAttempt);
-overload(secondAttempt);
-overload((Side)secondAttempt);
-}
-}
+{
+				"text" : "Consider the following program:\r\n\r\nclass StrEqual {\r\n\r\n\tpublic static void main(String []args) {\r\n\t\tString s1 = \"hi\";\r\n\t\tString s2 = new String(\"hi\");\r\n\t\tString s3 = \"hi\";\r\n\t \r\n\t\tif(s1 == s2) {\r\n\t\t\tSystem.out.println(\"s1 and s2 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and s2 not equal\");\r\n\t\t}\r\n\t \r\n\t\tif(s1 == s3) {\r\n\t\tSystem.out.println(\"s1 and and s3 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and and s3 not equal\");\r\n\t\t}\r\n\t}\r\n}\r\n",
+				"answers" :[
+					{
+						"text": "s1 and s2 equal\r\ns1 and s3 equal",
+						"index": 1
+					},
+					{
+						"text": "s1 and s2 equal\r\ns1 and s3 not equal",
+						"index": 2
+					},
+					{
+						"text": "s1 and s2 not equal\r\ns1 and s3 equal",
+						"index": 3
+					},
+					{
+						"text": "s1 and s2 not equal\r\ns1 and s3 not equal",
+						"index": 4
+					}
+				],
+				"indexSuccesQuestion" : 3,
+				"explanation": "JVM sets a constant pool in which it stores all the string constants used in the type. If two references are\r\ndeclared with a constant, then both refer to the same constant object. The == operator checks the similarity of\r\nobjects itself (and not the values in it). Here, the first comparison is between two distinct objects, so we get s1\r\nand s2 not equal. On the other hand, since references of s1 and s3 refer to the same object, we get s1 and\r\ns3 equal."
+			}

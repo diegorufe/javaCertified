@@ -245,6 +245,245 @@
 				],
 				"indexSuccesQuestion" : 2,
 				"explanation" : "Here is the description of matches for the four enumeration values:\r\n\u2022\t \u201Cclub\u201D matches with the case \u201CClub\u201D.\r\n\u2022\t For \u201CSpade\u201D, the case \u201Cspade\u201D does not match because of the case difference (switch case\r\nmatch is case sensitive).\r\n\u2022\t does not match with \u201Cdiamond\u201D because case statements should exactly match and there are\r\nextra whitespaces in the original string.\r\n\u2022\t \u201Chearts\u201D does not match the string \u201Cheart\u201D."
+			},
+			{
+			   "text": "class Outer {\r\n static class Inner {\r\n public final String text = \"Inner\";\r\n }\r\n}\n Which one of the following expressions when replaced for the text in place of the comment \/*CODE HERE*\/ will\r\nprint the output \u201CInner\u201D in console?",
+			   "answers": [
+				  {
+					 "text": "new Outer.Inner().text",
+					 "index": 1
+				  },
+				  {
+					 "text": "Outer.new Inner().text",
+					 "index": 2
+				  },
+				  {
+					 "text": " Outer.Inner.text",
+					 "index": 3
+				  },
+				  {
+					 "text": " new Outer().Inner.text",
+					 "index": 4
+				  }
+			   ],
+			   "indexSuccesQuestion": 1,
+			   "explanation": "The correct way to access fields of the static inner class is to use the inner class instance along with the outer\r\nclass, so new Outer.Inner().text will do the job."
+			},
+			{
+			   "text": "enum Cards { CLUB, SPADE, DIAMOND, HEARTS };\r\nclass CardsEnumTest {\r\n public static void main(String []args) {\r\n /* TRAVERSE */\r\n }\r\n}\r\nWhich one of the following will you replace in place of the comment \/* TRAVERSE *\/ to traverse the Cards\r\nenumeration and print the output \u201CCLUB SPADE DIAMOND HEARTS\u201D?",
+			   "answers": [
+				  {
+					 "text": " for(Cards card : Cards.values())\r\n System.out.print(card + \" \");",
+					 "index": 1
+				  },
+				  {
+					 "text": " for(Cards card : Cards.iterator())\r\n System.out.print(card + \" \");",
+					 "index": 2
+				  },
+				  {
+					 "text": "for(Cards card : Cards.enums())\r\n System.out.print(card + \" \");",
+					 "index": 3
+				  },
+				  {
+					 "text": " for(Cards card : Cards.items())\r\n System.out.print(card + \" \");",
+					 "index": 4
+				  },
+				  {
+					 "text": "There is no way to print the string names of this enumeration. The toString() method of enumeration returns the\r\n ordinal value of the enumeration, which is equivalent to calling card.ordinal().toString();",
+					 "index": 5
+				  }
+			   ],
+			   "indexSuccesQuestion": 1,
+			   "explanation": "The values() method of an enumeration returns the array of enumeration members."
+			},
+			{
+			   "text": "interface I1 {}\r\ninterface I2 {}\r\nabstract class C {} \nwhich one of the following will compile without errors?",
+			   "answers": [
+				  {
+					 "text": "class CI12 extends C, I1, I2 {}",
+					 "index": 1
+				  },
+				  {
+					 "text": "class CI12 implements C extends I1, I2 {}",
+					 "index": 2
+				  },
+				  {
+					 "text": "class CI12 implements C, I1, I2 {}",
+					 "index": 3
+				  },
+				  {
+					 "text": "class CI12 extends C implements I1, I2 {}",
+					 "index": 4
+				  },
+				  {
+					 "text": "class CI12 extends C implements I1 implements I2 {}",
+					 "index": 5
+				  },
+				  {
+					 "text": "class CI12 implements C extends I1 extends I2 {}",
+					 "index": 6
+				  }
+			   ],
+			   "indexSuccesQuestion": 4,
+			   "explanation": "A class inherits another class using the extends keyword and inherits interfaces using the implements keyword."
+			},
+			{
+			   "text": "interface I1 {}\r\ninterface I2 {}\r\nwhich one of the following will compile without errors?",
+			   "answers": [
+				  {
+					 "text": "interface II implements I1, I2 {}",
+					 "index": 1
+				  },
+				  {
+					 "text": "interface II implements I1 implements I2 {}",
+					 "index": 2
+				  },
+				  {
+					 "text": "interface II implements I1 extends I2 {}",
+					 "index": 3
+				  },
+				  {
+					 "text": "interface II extends I1, I2 {}",
+					 "index": 4
+				  }
+			   ],
+			   "indexSuccesQuestion": 4,
+			   "explanation": "interface II extends I1, I2 {}\r\nIt is possible for an interface to extend one or more interfaces. In that case, we need to use the extends keyword\r\nand separate the list of super-interfaces using commas."
+			},
+			{
+			   "text": "abstract class AbstractBook {\r\n public String name;\r\n}\r\ninterface Sleepy {\r\n public String name = \"undefined\";\r\n}\r\nclass Book extends AbstractBook implements Sleepy {\r\n public Book(String name) {\r\n this.name = name; // LINE A\r\n }\r\n public static void main(String []args) {\r\n AbstractBook philosophyBook = new Book(\"Principia Mathematica\");\r\n System.out.println(\"The name of the book is \" + philosophyBook.name); // LINE B\r\n }\r\n}\r\nWhich one of the following options correctly describes the behavior of this program?",
+			   "answers": [
+				  {
+					 "text": "The program will print the output “The name of the book is Principia Mathematica”",
+					 "index": 1
+				  },
+				  {
+					 "text": "The program will print the output “The name of the book is undefined”",
+					 "index": 2
+				  },
+				  {
+					 "text": "The program will not compile and result in a compiler error “ambiguous reference to name” in line marked with\r\n comment LINE A.",
+					 "index": 3
+				  },
+				  {
+					 "text": "The program will not compile and result in a compiler error “ambiguous reference to name” in line marked with\r\n comment LINE B.",
+					 "index": 4
+				  }
+			   ],
+			   "indexSuccesQuestion": 3,
+			   "explanation": "interface II extends I1, I2 {}\r\nIt is possible for an interface to extend one or more interfaces. In that case, we need to use the extends keyword\r\nand separate the list of super-interfaces using commas."
+			},
+			{
+			   "text": "Which one of the following relationships describes the OO design concept of “composition”?",
+			   "answers": [
+				  {
+					 "text": "is-a",
+					 "index": 1
+				  },
+				  {
+					 "text": "is-a-kind-of",
+					 "index": 2
+				  },
+				  {
+					 "text": " has-a",
+					 "index": 3
+				  },
+				  {
+					 "text": "is-implemented-in-terms-of",
+					 "index": 4
+				  },
+				  {
+					 "text": "composed-as",
+					 "index": 5
+				  },
+				  {
+					 "text": "DAO",
+					 "index": 6
+				  }
+			   ],
+			   "indexSuccesQuestion": 3,
+			   "explanation": "has-a\r\nComposition is a design concept that refers to the has-a relationship."
+			},
+			{
+			   "text": "import java.util.Arrays;\r\nclass DefaultSorter {\r\n public static void main(String[] args) {\r\n String[] brics = {\"Brazil\", \"Russia\", \"India\", \"China\"};\r\n Arrays.sort(brics, null); // LINE A\r\n for(String country : brics) {\r\n System.out.print(country + \" \");\r\n }\r\n }\r\n}\r\nWhich one of the following options correctly describes the behavior of this program?",
+			   "answers": [
+				  {
+					 "text": "This program will result in a compiler error in line marked with comment LINE A.",
+					 "index": 1
+				  },
+				  {
+					 "text": "When executed, the program prints the following: Brazil Russia India China.",
+					 "index": 2
+				  },
+				  {
+					 "text": "When executed, the program prints the following: Brazil China India Russia.",
+					 "index": 3
+				  },
+				  {
+					 "text": "When executed, the program prints the following: Russia India China Brazil",
+					 "index": 4
+				  },
+				  {
+					 "text": "When executed, the program throws a runtime exception of NullPointerException when executing the line marked with comment LINE A.",
+					 "index": 5
+				  },
+				  {
+					 "text": "When executed, the program throws a runtime exception of InvalidComparatorException when executing the line marked with comment LINE A.",
+					 "index": 6
+				  }
+			   ],
+			   "indexSuccesQuestion": 3,
+			   "explanation": "When executed, the program prints the following: Brazil China India Russia.\r\nWhen null is passed as a second argument to the Arrays.sort() method, it means that the default Comparable\r\n(i.e., natural ordering for the elements) should be used. The default Comparator results in sorting the elements\r\nin ascending order. The program does not result in a NullPointerException or any other exceptions or a\r\ncompiler error."
+			},
+			{
+			   "text": "import java.util.*;\r\nclass DequeTest {\r\n public static void main(String []args) {\r\n Deque<Integer> deque = new ArrayDeque<>();\r\n deque.addAll(Arrays.asList(1, 2, 3, 4, 5));\r\n System.out.println(\"The removed element is: \" + deque.remove()); // ERROR?\r\n }\r\n}\r\nWhich one of the following correctly describes the behavior of this program?",
+			   "answers": [
+				  {
+					 "text": "When executed, this program prints the following: “The removed element is: 5”",
+					 "index": 1
+				  },
+				  {
+					 "text": "When executed, this program prints the following: “The removed element is: 1”",
+					 "index": 2
+				  },
+				  {
+					 "text": "When compiled, the program results in a compiler error of “remove() returns void” for the line marked with the\r\n comment ERROR.",
+					 "index": 3
+				  },
+				  {
+					 "text": "When executed, this program throws InvalidOperationException.",
+					 "index": 4
+				  }
+			   ],
+			   "indexSuccesQuestion": 2,
+			   "explanation": "When executed, this program prints the following: “The removed element is: 1”.\r\nThe remove() method is equivalent to the removeFirst() method, which removes the first element (head of the\r\nqueue) of the Deque object. "
+			},
+			{
+			   "text": "import java.util.*;\r\nclass Diamond {\r\n public static void main(String[] args) {\r\n List list1 = new ArrayList<>(Arrays.asList(1, \"two\", 3.0)); // ONE\r\n List list2 = new LinkedList<>\r\n (Arrays.asList(new Integer(1), new Float(2.0F), new Double(3.0))); // TWO\r\n list1 = list2; // THREE\r\n for(Object element : list1) {\r\n System.out.print(element + \" \");\r\n }\r\n }\r\n}\r\nWhich one of the following describes the expected behavior of this program?",
+			   "answers": [
+				  {
+					 "text": "The program results in compiler error in line marked with comment ONE.",
+					 "index": 1
+				  },
+				  {
+					 "text": "The program results in compiler error in line marked with comment TWO",
+					 "index": 2
+				  },
+				  {
+					 "text": "The program results in compiler error in line marked with comment THREE.",
+					 "index": 3
+				  },
+				  {
+					 "text": "When executed, the program prints 1 2.0 3.0.",
+					 "index": 4
+				  },
+				  {
+					 "text": "When executed, this program throws a ClassCastException",
+					 "index": 5
+				  }
+			   ],
+			   "indexSuccesQuestion": 4,
+			   "explanation": "When executed, the program prints the following: 1 2.0 3.0.\r\nThe List is a generic type that is used here in raw form; hence it allows us to put different types of values in list2.\r\nTherefore, it prints the following: 1 2.0 3.0"
 			}
 		]
 }
