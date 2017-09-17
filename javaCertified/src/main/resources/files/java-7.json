@@ -1,489 +1,632 @@
 {
-	"questions" : [
-			{
-				"text" : "Consider the following program:\r\n\r\nclass StrEqual {\r\n\r\n\tpublic static void main(String []args) {\r\n\t\tString s1 = \"hi\";\r\n\t\tString s2 = new String(\"hi\");\r\n\t\tString s3 = \"hi\";\r\n\t \r\n\t\tif(s1 == s2) {\r\n\t\t\tSystem.out.println(\"s1 and s2 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and s2 not equal\");\r\n\t\t}\r\n\t \r\n\t\tif(s1 == s3) {\r\n\t\tSystem.out.println(\"s1 and and s3 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and and s3 not equal\");\r\n\t\t}\r\n\t}\r\n}\r\n",
-				"answers" :[
-					{
-						"text": "s1 and s2 equal\r\ns1 and s3 equal",
-						"index": 1
-					},
-					{
-						"text": "s1 and s2 equal\r\ns1 and s3 not equal",
-						"index": 2
-					},
-					{
-						"text": "s1 and s2 not equal\r\ns1 and s3 equal",
-						"index": 3
-					},
-					{
-						"text": "s1 and s2 not equal\r\ns1 and s3 not equal",
-						"index": 4
-					}
-				],
-				"indexSuccesQuestion" : 3,
-				"explanation": "JVM sets a constant pool in which it stores all the string constants used in the type. If two references are\r\ndeclared with a constant, then both refer to the same constant object. The == operator checks the similarity of\r\nobjects itself (and not the values in it). Here, the first comparison is between two distinct objects, so we get s1\r\nand s2 not equal. On the other hand, since references of s1 and s3 refer to the same object, we get s1 and\r\ns3 equal."
-			},
-			{
-				"text" : "Consider the following program:\r\n\tclass Point2D {\r\n\t\tprivate int x, y;\r\n\t\tpublic Point2D(int x, int y) {\r\n\t\t\tx = x;\r\n\t\t}\r\n\t \r\n\t\tpublic String toString() {\r\n\t\t\treturn \"[\" + x + \", \" + y + \"]\";\r\n\t\t}\r\n\t\tpublic static void main(String []args) {\r\n\t\t\tPoint2D point = new Point2D(10, 20);\r\n\t\t\tSystem.out.println(point);\r\n\t\t}\r\n}",
-				"answers" :[
-					{
-						"text": "point",
-						"index": 1
-					},
-					{
-						"text": "Point",
-						"index": 2
-					},
-					{
-						"text": "[0, 0]",
-						"index": 3
-					},
-					{
-						"text": "[10, 0]",
-						"index": 4
-					},
-					{
-						"text": "[10, 20]",
-						"index": 5
-					}
-				],
-				"indexSuccesQuestion" : 3,
-				"explanation" : "The assignment x = x; inside the construct reassigns the passed parameter; it does not assign the member\r\nx in Point2D. The correct way to perform the assignment is this.x = x;. Field y is not assigned, so its value\r\nremains 0."
-			},
-			{
-				"text": "class Increment {\r\npublic static void main(String []args) {\r\nInteger i = 10;\r\nInteger j = 11;\r\nInteger k = ++i;\r\n\/\/ INCR\r\nSystem.out.println(\"k == j is \" + (k == j));\r\nSystem.out.println(\"k.equals(j) is \" + k.equals(j));\r\n}\r\n}",
-				"answers" :[
-					{
-						"text": "When executed, this program prints\r\nk == j is false\r\nk.equals(j) is false",
-						"index": 1
-					},
-					{
-						"text": "When executed, this program prints\r\nk == j is true\r\nk.equals(j) is false",
-						"index": 2
-					},
-					{
-						"text": "When executed, this program prints\r\nk == j is false\r\nk.equals(j) is true",
-						"index": 3
-					},
-					{
-						"text": "When executed, this program prints\r\nk == j is true\r\nk.equals(j) is true",
-						"index": 4
-					},
-					{
-						"text": "When compiled, the program will result in a compiler error in the line marked with the comment INCR",
-						"index": 5
-					}
-				],
-				"indexSuccesQuestion" : 4,
-				"explanation": "The Integer objects are immutable objects. If there is an Integer object for a value that already exists, then\r\nit does not create a new object again. In other words, Java uses sharing of immutable Integer objects, so two\r\nInteger objects are equal if their values are equal (no matter if you use == operators to compare the references or\r\nuse equals() method to compare the contents)."
-			},
-			{
-				"text" : "Consider the following program:\r\nclass ArrayCompare {\r\n\tpublic static void main(String []args) {\r\n\t\tint []arr1 = {1, 2, 3, 4, 5};\r\n\t\tint []arr2 = {1, 2, 3, 4, 5};\r\n\t\tSystem.out.println(\"arr1 == arr2 is \" + (arr1 == arr2));\r\n\t\tSystem.out.println(\"arr1.equals(arr2) is \" + arr1.equals(arr2));\r\n\t\tSystem.out.println(\"Arrays.equals(arr1, arr2) is \" +\r\n\t\tjava.util.Arrays.equals(arr1, arr2));\r\n\t}\r\n}",
-				"answers" :[
-					{
-						"text": "arr1 == arr2 is false\r\narr1.equals(arr2) is false\r\nArrays.equals(arr1, arr2) is true",
-						"index": 1
-					},
-					{
-						"text": "arr1 == arr2 is true\r\narr1.equals(arr2) is false\r\nArrays.equals(arr1, arr2) is true",
-						"index": 2
-					},
-					{
-						"text": "arr1 == arr2 is false\r\narr1.equals(arr2) is true\r\nArrays.equals(arr1, arr2) is true",
-						"index": 3
-					},
-					{
-						"text": "arr1 == arr2 is true\r\narr1.equals(arr2) is true\r\nArrays.equals(arr1, arr2) is false",
-						"index": 4
-					},
-					{
-						"text": "arr1 == arr2 is true\r\narr1.equals(arr2) is true\r\nArrays.equals(arr1, arr2) is true",
-						"index": 5
-					}
-				],
-				"indexSuccesQuestion" : 1,
-				"explanation" : "The first comparison between two array objects is carried out using the == operator, which compares object\r\nsimilarity so it returns false here. The equals() method, which compares this array object with the passed array\r\nobject, does not compare values of the array since it is inherited from the Object class. Thus we get another false.\r\nOn the other hand, the Arrays class implements various equals() methods to compare two array objects of\r\ndifferent types; hence we get true from the last invocation."
-			},
-			{
-				"text": "Consider the following program:\r\nclass NullInstanceof {\r\n\tpublic static void main(String []args){\r\n\t\tString str = null;\r\n\t\tif(str instanceof Object){\t \/\/ NULLCHK\r\n\t\t\tSystem.out.println(\"str is Object\");\r\n\t\t}else{\r\n\t\t\tSystem.out.println(\"str is not Object\");\r\n\t\t}\r\n\t}\r\n}",
-				"answers" :[
-					{
-						"text": "This program will result in a compiler error in line marked with comment NULLCHK.",
-						"index": 1
-					},
-					{
-						"text": "This program will result in a NullPointerException in line marked with comment NULLCHK",
-						"index": 2
-					},
-					{
-						"text": "When executed, this program will print the following: str is Object",
-						"index": 3
-					},
-					{
-						"text": "When executed, this program will print the following: str is not Object",
-						"index": 4
-					}
-				],
-				"indexSuccesQuestion" : 4,
-				"explanation" : "The variable str was declared but not instantiated; hence the instanceof operator returns false."
-			},
-			{
-				"text": "interface Side { String getSide(); }\r\n \r\nclass Head implements Side {\r\n\tpublic String getSide() { return \"Head \"; }\r\n}\r\n \r\nclass Tail implements Side {\r\n\tString getSide() { return \"Tail \"; }\r\n}\r\n\r\nclass Coin {\r\n public static void overload(Head side) { System.out.print(side.getSide()); }\r\n public static void overload(Tail side) { System.out.print(side.getSide()); }\r\n public static void overload(Side side) { System.out.print(\"Side \"); }\r\n public static void overload(Object side) { System.out.print(\"Object \"); }\r\n\r\n public static void main(String []args) {\r\n Side firstAttempt = new Head();\r\n Tail secondAttempt = new Tail();\r\n overload(firstAttempt);\r\n overload((Object)firstAttempt);\r\n overload(secondAttempt);\r\n overload((Side)secondAttempt);\r\n }\r\n}",
-				"answers" :[
-					{
-						"text": "Head Head Tail Tail",
-						"index": 1
-					},
-					{
-						"text": "Side Object Tail Side",
-						"index": 2
-					},
-					{
-						"text": "Head Object Tail Side",
-						"index": 3
-					},
-					{
-						"text": "Side Head Tail Side",
-						"index": 4
-					}
-				],
-				"indexSuccesQuestion" : 2,
-				"explanation" : "Overloading is based on the static type of the objects (while overriding and runtime resolution resolves to the\r\ndynamic type of the objects). Here is how the calls to the overload() method are resolved:\r\n\r\n\u2022\t overload(firstAttempt); --> firstAttempt is of type Side, hence it resolves to\r\noverload(Side).\r\n\u2022\t overload((Object)firstAttempt); -> firstAttempt is casted to Object, hence it resolves to\r\noverload(Object)."
-			},
-			{
-				"text": "Consider the following program:\r\nclass Overloaded {\r\n public static void foo(Integer i) { System.out.println(\"foo(Integer)\"); }\r\n public static void foo(short i) { System.out.println(\"foo(short)\"); }\r\n public static void foo(long i) { System.out.println(\"foo(long)\"); }\r\n public static void foo(int ... i) { System.out.println(\"foo(int ...)\"); }\r\n public static void main(String []args) {\r\n foo(10);\r\n }\r\n}",
-				"answers" :[
-					{
-						"text": "foo(Integer)",
-						"index": 1
-					},
-					{
-						"text": "foo(short)",
-						"index": 2
-					},
-					{
-						"text": "foo(long)",
-						"index": 3
-					},
-					{
-						"text": "foo(int ...)",
-						"index": 4
-					}
-				],
-				"indexSuccesQuestion" : 3,
-				"explanation" : "For an integer literal, the JVM matches in the following order: int, long, Integer, int.... In other words, it\r\nfirst looks for an int type parameter; if it is not provided, then it looks for long type; and so on. Here, since the int\r\ntype parameter is not specified with any overloaded method, it matches with foo(long)."
-			},
-			{
-				"text": "Consider the following program:\r\nclass Base {\r\n public static void foo(Base bObj) {\r\n System.out.println(\"In Base.foo()\");\r\n bObj.bar();\r\n }\r\n \r\n public void bar() {\r\n System.out.println(\"In Base.bar()\");\r\n }\r\n}\r\nclass Derived extends Base {\r\n public static void foo(Base bObj) {\r\n System.out.println(\"In Derived.foo()\");\r\n bObj.bar();\r\n }\r\n public void bar() {\r\n System.out.println(\"In Derived.bar()\");\r\n }\r\n}\r\nclass OverrideTest {\r\n public static void main(String []args) {\r\n Base bObj = new Derived();\r\n bObj.foo(bObj);\r\n }\r\n}",
-				"answers" :[
-					{
-						"text": "In Base.foo() In Base.bar()",
-						"index": 1
-					},
-					{
-						"text": "In Base.foo() In Derived.bar()",
-						"index": 2
-					},
-					{
-						"text": "In Derived.foo() In Base.bar()",
-						"index": 3
-					},
-					{
-						"text": "In Derived.foo() In Derived.bar()",
-						"index": 4
-					}
-				],
-				"indexSuccesQuestion" : 2,
-				"explanation" : "A static method is resolved statically. Inside the static method, a virtual method is invoked, which is resolved\r\ndynamically."
-			},
-			{
-				"text": "class CannotFlyException extends Exception {}\r\ninterface Birdie {\r\n public abstract void fly() throws CannotFlyException;\r\n}\r\ninterface Biped {\r\n public void walk();\r\n}\r\nabstract class NonFlyer {\r\n public void fly() { System.out.print(\"cannot fly \"); } \/\/ LINE A\r\n}\r\n\r\nclass Penguin extends NonFlyer implements Birdie, Biped { \/\/ LINE B\r\n public void walk() { System.out.print(\"walk \"); }\r\n}\r\nclass PenguinTest {\r\n public static void main(String []args) {\r\n Penguin pingu = new Penguin();\r\n pingu.walk();\r\n pingu.fly();\r\n }\r\n}",
-				"answers" :[
-					{
-						"text": "Compiler error in line with comment LINE A because fly() does not declare to throw CannotFlyException.",
-						"index": 1
-					},
-					{
-						"text": "Compiler error in line with comment LINE B because fly() is not defined and hence need to declare it abstract.",
-						"index": 2
-					},
-					{
-						"text": "It crashes after throwing the exception CannotFlyException.",
-						"index": 3
-					},
-					{
-						"text": "When executed, the program prints “walk cannot fly",
-						"index": 4
-					}
-				],
-				"indexSuccesQuestion" : 4,
-				"explanation" : "In order to override a method, it is not necessary for the overridden method to specify an exception. However, if\r\nthe exception is specified, then the specified exception must be the same or a subclass of the specified exception\r\nin the method defined in the super class (or interface)."
-			},
-			{
-				"text": "class TestSwitch {\r\n public static void main(String []args) {\r\n String [] cards = { \"Club\", \"spade\", \" diamond \", \"hearts\" };\r\n for(String card : cards) {\r\n switch(card) {\r\n case \"Club\" : System.out.print(\" club \"); break;\r\n case \"Spade\" : System.out.print(\" spade \"); break;\r\n case \"diamond\" : System.out.print(\" diamond \"); break;\r\n case \"heart\" : System.out.print(\" heart \"); break;\r\n default: System.out.print(\" none \");\r\n }\r\n }\r\n }\r\n}",
-				"answers" :[
-					{
-						"text": "none none none none",
-						"index": 1
-					},
-					{
-						"text": "club none none none",
-						"index": 2
-					},
-					{
-						"text": "club spade none none",
-						"index": 3
-					},
-					{
-						"text": "club spade diamond none",
-						"index": 4
-					},
-					{
-						"text": "club spade diamond heart",
-						"index": 5
-					}
-				],
-				"indexSuccesQuestion" : 2,
-				"explanation" : "Here is the description of matches for the four enumeration values:\r\n\u2022\t \u201Cclub\u201D matches with the case \u201CClub\u201D.\r\n\u2022\t For \u201CSpade\u201D, the case \u201Cspade\u201D does not match because of the case difference (switch case\r\nmatch is case sensitive).\r\n\u2022\t does not match with \u201Cdiamond\u201D because case statements should exactly match and there are\r\nextra whitespaces in the original string.\r\n\u2022\t \u201Chearts\u201D does not match the string \u201Cheart\u201D."
-			},
-			{
-			   "text": "class Outer {\r\n static class Inner {\r\n public final String text = \"Inner\";\r\n }\r\n}\n Which one of the following expressions when replaced for the text in place of the comment \/*CODE HERE*\/ will\r\nprint the output \u201CInner\u201D in console?",
-			   "answers": [
-				  {
-					 "text": "new Outer.Inner().text",
-					 "index": 1
-				  },
-				  {
-					 "text": "Outer.new Inner().text",
-					 "index": 2
-				  },
-				  {
-					 "text": " Outer.Inner.text",
-					 "index": 3
-				  },
-				  {
-					 "text": " new Outer().Inner.text",
-					 "index": 4
-				  }
-			   ],
-			   "indexSuccesQuestion": 1,
-			   "explanation": "The correct way to access fields of the static inner class is to use the inner class instance along with the outer\r\nclass, so new Outer.Inner().text will do the job."
-			},
-			{
-			   "text": "enum Cards { CLUB, SPADE, DIAMOND, HEARTS };\r\nclass CardsEnumTest {\r\n public static void main(String []args) {\r\n /* TRAVERSE */\r\n }\r\n}\r\nWhich one of the following will you replace in place of the comment \/* TRAVERSE *\/ to traverse the Cards\r\nenumeration and print the output \u201CCLUB SPADE DIAMOND HEARTS\u201D?",
-			   "answers": [
-				  {
-					 "text": " for(Cards card : Cards.values())\r\n System.out.print(card + \" \");",
-					 "index": 1
-				  },
-				  {
-					 "text": " for(Cards card : Cards.iterator())\r\n System.out.print(card + \" \");",
-					 "index": 2
-				  },
-				  {
-					 "text": "for(Cards card : Cards.enums())\r\n System.out.print(card + \" \");",
-					 "index": 3
-				  },
-				  {
-					 "text": " for(Cards card : Cards.items())\r\n System.out.print(card + \" \");",
-					 "index": 4
-				  },
-				  {
-					 "text": "There is no way to print the string names of this enumeration. The toString() method of enumeration returns the\r\n ordinal value of the enumeration, which is equivalent to calling card.ordinal().toString();",
-					 "index": 5
-				  }
-			   ],
-			   "indexSuccesQuestion": 1,
-			   "explanation": "The values() method of an enumeration returns the array of enumeration members."
-			},
-			{
-			   "text": "interface I1 {}\r\ninterface I2 {}\r\nabstract class C {} \nwhich one of the following will compile without errors?",
-			   "answers": [
-				  {
-					 "text": "class CI12 extends C, I1, I2 {}",
-					 "index": 1
-				  },
-				  {
-					 "text": "class CI12 implements C extends I1, I2 {}",
-					 "index": 2
-				  },
-				  {
-					 "text": "class CI12 implements C, I1, I2 {}",
-					 "index": 3
-				  },
-				  {
-					 "text": "class CI12 extends C implements I1, I2 {}",
-					 "index": 4
-				  },
-				  {
-					 "text": "class CI12 extends C implements I1 implements I2 {}",
-					 "index": 5
-				  },
-				  {
-					 "text": "class CI12 implements C extends I1 extends I2 {}",
-					 "index": 6
-				  }
-			   ],
-			   "indexSuccesQuestion": 4,
-			   "explanation": "A class inherits another class using the extends keyword and inherits interfaces using the implements keyword."
-			},
-			{
-			   "text": "interface I1 {}\r\ninterface I2 {}\r\nwhich one of the following will compile without errors?",
-			   "answers": [
-				  {
-					 "text": "interface II implements I1, I2 {}",
-					 "index": 1
-				  },
-				  {
-					 "text": "interface II implements I1 implements I2 {}",
-					 "index": 2
-				  },
-				  {
-					 "text": "interface II implements I1 extends I2 {}",
-					 "index": 3
-				  },
-				  {
-					 "text": "interface II extends I1, I2 {}",
-					 "index": 4
-				  }
-			   ],
-			   "indexSuccesQuestion": 4,
-			   "explanation": "interface II extends I1, I2 {}\r\nIt is possible for an interface to extend one or more interfaces. In that case, we need to use the extends keyword\r\nand separate the list of super-interfaces using commas."
-			},
-			{
-			   "text": "abstract class AbstractBook {\r\n public String name;\r\n}\r\ninterface Sleepy {\r\n public String name = \"undefined\";\r\n}\r\nclass Book extends AbstractBook implements Sleepy {\r\n public Book(String name) {\r\n this.name = name; // LINE A\r\n }\r\n public static void main(String []args) {\r\n AbstractBook philosophyBook = new Book(\"Principia Mathematica\");\r\n System.out.println(\"The name of the book is \" + philosophyBook.name); // LINE B\r\n }\r\n}\r\nWhich one of the following options correctly describes the behavior of this program?",
-			   "answers": [
-				  {
-					 "text": "The program will print the output “The name of the book is Principia Mathematica”",
-					 "index": 1
-				  },
-				  {
-					 "text": "The program will print the output “The name of the book is undefined”",
-					 "index": 2
-				  },
-				  {
-					 "text": "The program will not compile and result in a compiler error “ambiguous reference to name” in line marked with\r\n comment LINE A.",
-					 "index": 3
-				  },
-				  {
-					 "text": "The program will not compile and result in a compiler error “ambiguous reference to name” in line marked with\r\n comment LINE B.",
-					 "index": 4
-				  }
-			   ],
-			   "indexSuccesQuestion": 3,
-			   "explanation": "interface II extends I1, I2 {}\r\nIt is possible for an interface to extend one or more interfaces. In that case, we need to use the extends keyword\r\nand separate the list of super-interfaces using commas."
-			},
-			{
-			   "text": "Which one of the following relationships describes the OO design concept of “composition”?",
-			   "answers": [
-				  {
-					 "text": "is-a",
-					 "index": 1
-				  },
-				  {
-					 "text": "is-a-kind-of",
-					 "index": 2
-				  },
-				  {
-					 "text": " has-a",
-					 "index": 3
-				  },
-				  {
-					 "text": "is-implemented-in-terms-of",
-					 "index": 4
-				  },
-				  {
-					 "text": "composed-as",
-					 "index": 5
-				  },
-				  {
-					 "text": "DAO",
-					 "index": 6
-				  }
-			   ],
-			   "indexSuccesQuestion": 3,
-			   "explanation": "has-a\r\nComposition is a design concept that refers to the has-a relationship."
-			},
-			{
-			   "text": "import java.util.Arrays;\r\nclass DefaultSorter {\r\n public static void main(String[] args) {\r\n String[] brics = {\"Brazil\", \"Russia\", \"India\", \"China\"};\r\n Arrays.sort(brics, null); // LINE A\r\n for(String country : brics) {\r\n System.out.print(country + \" \");\r\n }\r\n }\r\n}\r\nWhich one of the following options correctly describes the behavior of this program?",
-			   "answers": [
-				  {
-					 "text": "This program will result in a compiler error in line marked with comment LINE A.",
-					 "index": 1
-				  },
-				  {
-					 "text": "When executed, the program prints the following: Brazil Russia India China.",
-					 "index": 2
-				  },
-				  {
-					 "text": "When executed, the program prints the following: Brazil China India Russia.",
-					 "index": 3
-				  },
-				  {
-					 "text": "When executed, the program prints the following: Russia India China Brazil",
-					 "index": 4
-				  },
-				  {
-					 "text": "When executed, the program throws a runtime exception of NullPointerException when executing the line marked with comment LINE A.",
-					 "index": 5
-				  },
-				  {
-					 "text": "When executed, the program throws a runtime exception of InvalidComparatorException when executing the line marked with comment LINE A.",
-					 "index": 6
-				  }
-			   ],
-			   "indexSuccesQuestion": 3,
-			   "explanation": "When executed, the program prints the following: Brazil China India Russia.\r\nWhen null is passed as a second argument to the Arrays.sort() method, it means that the default Comparable\r\n(i.e., natural ordering for the elements) should be used. The default Comparator results in sorting the elements\r\nin ascending order. The program does not result in a NullPointerException or any other exceptions or a\r\ncompiler error."
-			},
-			{
-			   "text": "import java.util.*;\r\nclass DequeTest {\r\n public static void main(String []args) {\r\n Deque<Integer> deque = new ArrayDeque<>();\r\n deque.addAll(Arrays.asList(1, 2, 3, 4, 5));\r\n System.out.println(\"The removed element is: \" + deque.remove()); // ERROR?\r\n }\r\n}\r\nWhich one of the following correctly describes the behavior of this program?",
-			   "answers": [
-				  {
-					 "text": "When executed, this program prints the following: “The removed element is: 5”",
-					 "index": 1
-				  },
-				  {
-					 "text": "When executed, this program prints the following: “The removed element is: 1”",
-					 "index": 2
-				  },
-				  {
-					 "text": "When compiled, the program results in a compiler error of “remove() returns void” for the line marked with the\r\n comment ERROR.",
-					 "index": 3
-				  },
-				  {
-					 "text": "When executed, this program throws InvalidOperationException.",
-					 "index": 4
-				  }
-			   ],
-			   "indexSuccesQuestion": 2,
-			   "explanation": "When executed, this program prints the following: “The removed element is: 1”.\r\nThe remove() method is equivalent to the removeFirst() method, which removes the first element (head of the\r\nqueue) of the Deque object. "
-			},
-			{
-			   "text": "import java.util.*;\r\nclass Diamond {\r\n public static void main(String[] args) {\r\n List list1 = new ArrayList<>(Arrays.asList(1, \"two\", 3.0)); // ONE\r\n List list2 = new LinkedList<>\r\n (Arrays.asList(new Integer(1), new Float(2.0F), new Double(3.0))); // TWO\r\n list1 = list2; // THREE\r\n for(Object element : list1) {\r\n System.out.print(element + \" \");\r\n }\r\n }\r\n}\r\nWhich one of the following describes the expected behavior of this program?",
-			   "answers": [
-				  {
-					 "text": "The program results in compiler error in line marked with comment ONE.",
-					 "index": 1
-				  },
-				  {
-					 "text": "The program results in compiler error in line marked with comment TWO",
-					 "index": 2
-				  },
-				  {
-					 "text": "The program results in compiler error in line marked with comment THREE.",
-					 "index": 3
-				  },
-				  {
-					 "text": "When executed, the program prints 1 2.0 3.0.",
-					 "index": 4
-				  },
-				  {
-					 "text": "When executed, this program throws a ClassCastException",
-					 "index": 5
-				  }
-			   ],
-			   "indexSuccesQuestion": 4,
-			   "explanation": "When executed, the program prints the following: 1 2.0 3.0.\r\nThe List is a generic type that is used here in raw form; hence it allows us to put different types of values in list2.\r\nTherefore, it prints the following: 1 2.0 3.0"
-			}
-		]
+	"questions": [
+		{
+			"text": "Consider the following program:\r\n\r\nclass StrEqual {\r\n\r\n\tpublic static void main(String []args) {\r\n\t\tString s1 = \"hi\";\r\n\t\tString s2 = new String(\"hi\");\r\n\t\tString s3 = \"hi\";\r\n\t \r\n\t\tif(s1 == s2) {\r\n\t\t\tSystem.out.println(\"s1 and s2 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and s2 not equal\");\r\n\t\t}\r\n\t \r\n\t\tif(s1 == s3) {\r\n\t\tSystem.out.println(\"s1 and and s3 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and and s3 not equal\");\r\n\t\t}\r\n\t}\r\n}\r\n",
+			"answers": [
+				{
+					"text": "s1 and s2 equal\r\ns1 and s3 equal",
+					"index": 1
+				},
+				{
+					"text": "s1 and s2 equal\r\ns1 and s3 not equal",
+					"index": 2
+				},
+				{
+					"text": "s1 and s2 not equal\r\ns1 and s3 equal",
+					"index": 3
+				},
+				{
+					"text": "s1 and s2 not equal\r\ns1 and s3 not equal",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 3,
+			"explanation": "JVM sets a constant pool in which it stores all the string constants used in the type. If two references are\r\ndeclared with a constant, then both refer to the same constant object. The == operator checks the similarity of\r\nobjects itself (and not the values in it). Here, the first comparison is between two distinct objects, so we get s1\r\nand s2 not equal. On the other hand, since references of s1 and s3 refer to the same object, we get s1 and\r\ns3 equal."
+		},
+		{
+			"text": "Consider the following program:\r\n\tclass Point2D {\r\n\t\tprivate int x, y;\r\n\t\tpublic Point2D(int x, int y) {\r\n\t\t\tx = x;\r\n\t\t}\r\n\t \r\n\t\tpublic String toString() {\r\n\t\t\treturn \"[\" + x + \", \" + y + \"]\";\r\n\t\t}\r\n\t\tpublic static void main(String []args) {\r\n\t\t\tPoint2D point = new Point2D(10, 20);\r\n\t\t\tSystem.out.println(point);\r\n\t\t}\r\n}",
+			"answers": [
+				{
+					"text": "point",
+					"index": 1
+				},
+				{
+					"text": "Point",
+					"index": 2
+				},
+				{
+					"text": "[0, 0]",
+					"index": 3
+				},
+				{
+					"text": "[10, 0]",
+					"index": 4
+				},
+				{
+					"text": "[10, 20]",
+					"index": 5
+				}
+			],
+			"indexSuccesQuestion": 3,
+			"explanation": "The assignment x = x; inside the construct reassigns the passed parameter; it does not assign the member\r\nx in Point2D. The correct way to perform the assignment is this.x = x;. Field y is not assigned, so its value\r\nremains 0."
+		},
+		{
+			"text": "class Increment {\r\npublic static void main(String []args) {\r\nInteger i = 10;\r\nInteger j = 11;\r\nInteger k = ++i;\r\n\/\/ INCR\r\nSystem.out.println(\"k == j is \" + (k == j));\r\nSystem.out.println(\"k.equals(j) is \" + k.equals(j));\r\n}\r\n}",
+			"answers": [
+				{
+					"text": "When executed, this program prints\r\nk == j is false\r\nk.equals(j) is false",
+					"index": 1
+				},
+				{
+					"text": "When executed, this program prints\r\nk == j is true\r\nk.equals(j) is false",
+					"index": 2
+				},
+				{
+					"text": "When executed, this program prints\r\nk == j is false\r\nk.equals(j) is true",
+					"index": 3
+				},
+				{
+					"text": "When executed, this program prints\r\nk == j is true\r\nk.equals(j) is true",
+					"index": 4
+				},
+				{
+					"text": "When compiled, the program will result in a compiler error in the line marked with the comment INCR",
+					"index": 5
+				}
+			],
+			"indexSuccesQuestion": 4,
+			"explanation": "The Integer objects are immutable objects. If there is an Integer object for a value that already exists, then\r\nit does not create a new object again. In other words, Java uses sharing of immutable Integer objects, so two\r\nInteger objects are equal if their values are equal (no matter if you use == operators to compare the references or\r\nuse equals() method to compare the contents)."
+		},
+		{
+			"text": "Consider the following program:\r\nclass ArrayCompare {\r\n\tpublic static void main(String []args) {\r\n\t\tint []arr1 = {1, 2, 3, 4, 5};\r\n\t\tint []arr2 = {1, 2, 3, 4, 5};\r\n\t\tSystem.out.println(\"arr1 == arr2 is \" + (arr1 == arr2));\r\n\t\tSystem.out.println(\"arr1.equals(arr2) is \" + arr1.equals(arr2));\r\n\t\tSystem.out.println(\"Arrays.equals(arr1, arr2) is \" +\r\n\t\tjava.util.Arrays.equals(arr1, arr2));\r\n\t}\r\n}",
+			"answers": [
+				{
+					"text": "arr1 == arr2 is false\r\narr1.equals(arr2) is false\r\nArrays.equals(arr1, arr2) is true",
+					"index": 1
+				},
+				{
+					"text": "arr1 == arr2 is true\r\narr1.equals(arr2) is false\r\nArrays.equals(arr1, arr2) is true",
+					"index": 2
+				},
+				{
+					"text": "arr1 == arr2 is false\r\narr1.equals(arr2) is true\r\nArrays.equals(arr1, arr2) is true",
+					"index": 3
+				},
+				{
+					"text": "arr1 == arr2 is true\r\narr1.equals(arr2) is true\r\nArrays.equals(arr1, arr2) is false",
+					"index": 4
+				},
+				{
+					"text": "arr1 == arr2 is true\r\narr1.equals(arr2) is true\r\nArrays.equals(arr1, arr2) is true",
+					"index": 5
+				}
+			],
+			"indexSuccesQuestion": 1,
+			"explanation": "The first comparison between two array objects is carried out using the == operator, which compares object\r\nsimilarity so it returns false here. The equals() method, which compares this array object with the passed array\r\nobject, does not compare values of the array since it is inherited from the Object class. Thus we get another false.\r\nOn the other hand, the Arrays class implements various equals() methods to compare two array objects of\r\ndifferent types; hence we get true from the last invocation."
+		},
+		{
+			"text": "Consider the following program:\r\nclass NullInstanceof {\r\n\tpublic static void main(String []args){\r\n\t\tString str = null;\r\n\t\tif(str instanceof Object){\t \/\/ NULLCHK\r\n\t\t\tSystem.out.println(\"str is Object\");\r\n\t\t}else{\r\n\t\t\tSystem.out.println(\"str is not Object\");\r\n\t\t}\r\n\t}\r\n}",
+			"answers": [
+				{
+					"text": "This program will result in a compiler error in line marked with comment NULLCHK.",
+					"index": 1
+				},
+				{
+					"text": "This program will result in a NullPointerException in line marked with comment NULLCHK",
+					"index": 2
+				},
+				{
+					"text": "When executed, this program will print the following: str is Object",
+					"index": 3
+				},
+				{
+					"text": "When executed, this program will print the following: str is not Object",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 4,
+			"explanation": "The variable str was declared but not instantiated; hence the instanceof operator returns false."
+		},
+		{
+			"text": "interface Side { String getSide(); }\r\n \r\nclass Head implements Side {\r\n\tpublic String getSide() { return \"Head \"; }\r\n}\r\n \r\nclass Tail implements Side {\r\n\tString getSide() { return \"Tail \"; }\r\n}\r\n\r\nclass Coin {\r\n public static void overload(Head side) { System.out.print(side.getSide()); }\r\n public static void overload(Tail side) { System.out.print(side.getSide()); }\r\n public static void overload(Side side) { System.out.print(\"Side \"); }\r\n public static void overload(Object side) { System.out.print(\"Object \"); }\r\n\r\n public static void main(String []args) {\r\n Side firstAttempt = new Head();\r\n Tail secondAttempt = new Tail();\r\n overload(firstAttempt);\r\n overload((Object)firstAttempt);\r\n overload(secondAttempt);\r\n overload((Side)secondAttempt);\r\n }\r\n}",
+			"answers": [
+				{
+					"text": "Head Head Tail Tail",
+					"index": 1
+				},
+				{
+					"text": "Side Object Tail Side",
+					"index": 2
+				},
+				{
+					"text": "Head Object Tail Side",
+					"index": 3
+				},
+				{
+					"text": "Side Head Tail Side",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 2,
+			"explanation": "Overloading is based on the static type of the objects (while overriding and runtime resolution resolves to the\r\ndynamic type of the objects). Here is how the calls to the overload() method are resolved:\r\n\r\n\u2022\t overload(firstAttempt); --> firstAttempt is of type Side, hence it resolves to\r\noverload(Side).\r\n\u2022\t overload((Object)firstAttempt); -> firstAttempt is casted to Object, hence it resolves to\r\noverload(Object)."
+		},
+		{
+			"text": "Consider the following program:\r\nclass Overloaded {\r\n public static void foo(Integer i) { System.out.println(\"foo(Integer)\"); }\r\n public static void foo(short i) { System.out.println(\"foo(short)\"); }\r\n public static void foo(long i) { System.out.println(\"foo(long)\"); }\r\n public static void foo(int ... i) { System.out.println(\"foo(int ...)\"); }\r\n public static void main(String []args) {\r\n foo(10);\r\n }\r\n}",
+			"answers": [
+				{
+					"text": "foo(Integer)",
+					"index": 1
+				},
+				{
+					"text": "foo(short)",
+					"index": 2
+				},
+				{
+					"text": "foo(long)",
+					"index": 3
+				},
+				{
+					"text": "foo(int ...)",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 3,
+			"explanation": "For an integer literal, the JVM matches in the following order: int, long, Integer, int.... In other words, it\r\nfirst looks for an int type parameter; if it is not provided, then it looks for long type; and so on. Here, since the int\r\ntype parameter is not specified with any overloaded method, it matches with foo(long)."
+		},
+		{
+			"text": "Consider the following program:\r\nclass Base {\r\n public static void foo(Base bObj) {\r\n System.out.println(\"In Base.foo()\");\r\n bObj.bar();\r\n }\r\n \r\n public void bar() {\r\n System.out.println(\"In Base.bar()\");\r\n }\r\n}\r\nclass Derived extends Base {\r\n public static void foo(Base bObj) {\r\n System.out.println(\"In Derived.foo()\");\r\n bObj.bar();\r\n }\r\n public void bar() {\r\n System.out.println(\"In Derived.bar()\");\r\n }\r\n}\r\nclass OverrideTest {\r\n public static void main(String []args) {\r\n Base bObj = new Derived();\r\n bObj.foo(bObj);\r\n }\r\n}",
+			"answers": [
+				{
+					"text": "In Base.foo() In Base.bar()",
+					"index": 1
+				},
+				{
+					"text": "In Base.foo() In Derived.bar()",
+					"index": 2
+				},
+				{
+					"text": "In Derived.foo() In Base.bar()",
+					"index": 3
+				},
+				{
+					"text": "In Derived.foo() In Derived.bar()",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 2,
+			"explanation": "A static method is resolved statically. Inside the static method, a virtual method is invoked, which is resolved\r\ndynamically."
+		},
+		{
+			"text": "class CannotFlyException extends Exception {}\r\ninterface Birdie {\r\n public abstract void fly() throws CannotFlyException;\r\n}\r\ninterface Biped {\r\n public void walk();\r\n}\r\nabstract class NonFlyer {\r\n public void fly() { System.out.print(\"cannot fly \"); } \/\/ LINE A\r\n}\r\n\r\nclass Penguin extends NonFlyer implements Birdie, Biped { \/\/ LINE B\r\n public void walk() { System.out.print(\"walk \"); }\r\n}\r\nclass PenguinTest {\r\n public static void main(String []args) {\r\n Penguin pingu = new Penguin();\r\n pingu.walk();\r\n pingu.fly();\r\n }\r\n}",
+			"answers": [
+				{
+					"text": "Compiler error in line with comment LINE A because fly() does not declare to throw CannotFlyException.",
+					"index": 1
+				},
+				{
+					"text": "Compiler error in line with comment LINE B because fly() is not defined and hence need to declare it abstract.",
+					"index": 2
+				},
+				{
+					"text": "It crashes after throwing the exception CannotFlyException.",
+					"index": 3
+				},
+				{
+					"text": "When executed, the program prints “walk cannot fly",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 4,
+			"explanation": "In order to override a method, it is not necessary for the overridden method to specify an exception. However, if\r\nthe exception is specified, then the specified exception must be the same or a subclass of the specified exception\r\nin the method defined in the super class (or interface)."
+		},
+		{
+			"text": "class TestSwitch {\r\n public static void main(String []args) {\r\n String [] cards = { \"Club\", \"spade\", \" diamond \", \"hearts\" };\r\n for(String card : cards) {\r\n switch(card) {\r\n case \"Club\" : System.out.print(\" club \"); break;\r\n case \"Spade\" : System.out.print(\" spade \"); break;\r\n case \"diamond\" : System.out.print(\" diamond \"); break;\r\n case \"heart\" : System.out.print(\" heart \"); break;\r\n default: System.out.print(\" none \");\r\n }\r\n }\r\n }\r\n}",
+			"answers": [
+				{
+					"text": "none none none none",
+					"index": 1
+				},
+				{
+					"text": "club none none none",
+					"index": 2
+				},
+				{
+					"text": "club spade none none",
+					"index": 3
+				},
+				{
+					"text": "club spade diamond none",
+					"index": 4
+				},
+				{
+					"text": "club spade diamond heart",
+					"index": 5
+				}
+			],
+			"indexSuccesQuestion": 2,
+			"explanation": "Here is the description of matches for the four enumeration values:\r\n\u2022\t \u201Cclub\u201D matches with the case \u201CClub\u201D.\r\n\u2022\t For \u201CSpade\u201D, the case \u201Cspade\u201D does not match because of the case difference (switch case\r\nmatch is case sensitive).\r\n\u2022\t does not match with \u201Cdiamond\u201D because case statements should exactly match and there are\r\nextra whitespaces in the original string.\r\n\u2022\t \u201Chearts\u201D does not match the string \u201Cheart\u201D."
+		},
+		{
+			"text": "class Outer {\r\n static class Inner {\r\n public final String text = \"Inner\";\r\n }\r\n}\n Which one of the following expressions when replaced for the text in place of the comment \/*CODE HERE*\/ will\r\nprint the output \u201CInner\u201D in console?",
+			"answers": [
+				{
+					"text": "new Outer.Inner().text",
+					"index": 1
+				},
+				{
+					"text": "Outer.new Inner().text",
+					"index": 2
+				},
+				{
+					"text": " Outer.Inner.text",
+					"index": 3
+				},
+				{
+					"text": " new Outer().Inner.text",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 1,
+			"explanation": "The correct way to access fields of the static inner class is to use the inner class instance along with the outer\r\nclass, so new Outer.Inner().text will do the job."
+		},
+		{
+			"text": "enum Cards { CLUB, SPADE, DIAMOND, HEARTS };\r\nclass CardsEnumTest {\r\n public static void main(String []args) {\r\n /* TRAVERSE */\r\n }\r\n}\r\nWhich one of the following will you replace in place of the comment \/* TRAVERSE *\/ to traverse the Cards\r\nenumeration and print the output \u201CCLUB SPADE DIAMOND HEARTS\u201D?",
+			"answers": [
+				{
+					"text": " for(Cards card : Cards.values())\r\n System.out.print(card + \" \");",
+					"index": 1
+				},
+				{
+					"text": " for(Cards card : Cards.iterator())\r\n System.out.print(card + \" \");",
+					"index": 2
+				},
+				{
+					"text": "for(Cards card : Cards.enums())\r\n System.out.print(card + \" \");",
+					"index": 3
+				},
+				{
+					"text": " for(Cards card : Cards.items())\r\n System.out.print(card + \" \");",
+					"index": 4
+				},
+				{
+					"text": "There is no way to print the string names of this enumeration. The toString() method of enumeration returns the\r\n ordinal value of the enumeration, which is equivalent to calling card.ordinal().toString();",
+					"index": 5
+				}
+			],
+			"indexSuccesQuestion": 1,
+			"explanation": "The values() method of an enumeration returns the array of enumeration members."
+		},
+		{
+			"text": "interface I1 {}\r\ninterface I2 {}\r\nabstract class C {} \nwhich one of the following will compile without errors?",
+			"answers": [
+				{
+					"text": "class CI12 extends C, I1, I2 {}",
+					"index": 1
+				},
+				{
+					"text": "class CI12 implements C extends I1, I2 {}",
+					"index": 2
+				},
+				{
+					"text": "class CI12 implements C, I1, I2 {}",
+					"index": 3
+				},
+				{
+					"text": "class CI12 extends C implements I1, I2 {}",
+					"index": 4
+				},
+				{
+					"text": "class CI12 extends C implements I1 implements I2 {}",
+					"index": 5
+				},
+				{
+					"text": "class CI12 implements C extends I1 extends I2 {}",
+					"index": 6
+				}
+			],
+			"indexSuccesQuestion": 4,
+			"explanation": "A class inherits another class using the extends keyword and inherits interfaces using the implements keyword."
+		},
+		{
+			"text": "interface I1 {}\r\ninterface I2 {}\r\nwhich one of the following will compile without errors?",
+			"answers": [
+				{
+					"text": "interface II implements I1, I2 {}",
+					"index": 1
+				},
+				{
+					"text": "interface II implements I1 implements I2 {}",
+					"index": 2
+				},
+				{
+					"text": "interface II implements I1 extends I2 {}",
+					"index": 3
+				},
+				{
+					"text": "interface II extends I1, I2 {}",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 4,
+			"explanation": "interface II extends I1, I2 {}\r\nIt is possible for an interface to extend one or more interfaces. In that case, we need to use the extends keyword\r\nand separate the list of super-interfaces using commas."
+		},
+		{
+			"text": "abstract class AbstractBook {\r\n public String name;\r\n}\r\ninterface Sleepy {\r\n public String name = \"undefined\";\r\n}\r\nclass Book extends AbstractBook implements Sleepy {\r\n public Book(String name) {\r\n this.name = name; // LINE A\r\n }\r\n public static void main(String []args) {\r\n AbstractBook philosophyBook = new Book(\"Principia Mathematica\");\r\n System.out.println(\"The name of the book is \" + philosophyBook.name); // LINE B\r\n }\r\n}\r\nWhich one of the following options correctly describes the behavior of this program?",
+			"answers": [
+				{
+					"text": "The program will print the output “The name of the book is Principia Mathematica”",
+					"index": 1
+				},
+				{
+					"text": "The program will print the output “The name of the book is undefined”",
+					"index": 2
+				},
+				{
+					"text": "The program will not compile and result in a compiler error “ambiguous reference to name” in line marked with\r\n comment LINE A.",
+					"index": 3
+				},
+				{
+					"text": "The program will not compile and result in a compiler error “ambiguous reference to name” in line marked with\r\n comment LINE B.",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 3,
+			"explanation": "interface II extends I1, I2 {}\r\nIt is possible for an interface to extend one or more interfaces. In that case, we need to use the extends keyword\r\nand separate the list of super-interfaces using commas."
+		},
+		{
+			"text": "Which one of the following relationships describes the OO design concept of “composition”?",
+			"answers": [
+				{
+					"text": "is-a",
+					"index": 1
+				},
+				{
+					"text": "is-a-kind-of",
+					"index": 2
+				},
+				{
+					"text": " has-a",
+					"index": 3
+				},
+				{
+					"text": "is-implemented-in-terms-of",
+					"index": 4
+				},
+				{
+					"text": "composed-as",
+					"index": 5
+				},
+				{
+					"text": "DAO",
+					"index": 6
+				}
+			],
+			"indexSuccesQuestion": 3,
+			"explanation": "has-a\r\nComposition is a design concept that refers to the has-a relationship."
+		},
+		{
+			"text": "import java.util.Arrays;\r\nclass DefaultSorter {\r\n public static void main(String[] args) {\r\n String[] brics = {\"Brazil\", \"Russia\", \"India\", \"China\"};\r\n Arrays.sort(brics, null); // LINE A\r\n for(String country : brics) {\r\n System.out.print(country + \" \");\r\n }\r\n }\r\n}\r\nWhich one of the following options correctly describes the behavior of this program?",
+			"answers": [
+				{
+					"text": "This program will result in a compiler error in line marked with comment LINE A.",
+					"index": 1
+				},
+				{
+					"text": "When executed, the program prints the following: Brazil Russia India China.",
+					"index": 2
+				},
+				{
+					"text": "When executed, the program prints the following: Brazil China India Russia.",
+					"index": 3
+				},
+				{
+					"text": "When executed, the program prints the following: Russia India China Brazil",
+					"index": 4
+				},
+				{
+					"text": "When executed, the program throws a runtime exception of NullPointerException when executing the line marked with comment LINE A.",
+					"index": 5
+				},
+				{
+					"text": "When executed, the program throws a runtime exception of InvalidComparatorException when executing the line marked with comment LINE A.",
+					"index": 6
+				}
+			],
+			"indexSuccesQuestion": 3,
+			"explanation": "When executed, the program prints the following: Brazil China India Russia.\r\nWhen null is passed as a second argument to the Arrays.sort() method, it means that the default Comparable\r\n(i.e., natural ordering for the elements) should be used. The default Comparator results in sorting the elements\r\nin ascending order. The program does not result in a NullPointerException or any other exceptions or a\r\ncompiler error."
+		},
+		{
+			"text": "import java.util.*;\r\nclass DequeTest {\r\n public static void main(String []args) {\r\n Deque<Integer> deque = new ArrayDeque<>();\r\n deque.addAll(Arrays.asList(1, 2, 3, 4, 5));\r\n System.out.println(\"The removed element is: \" + deque.remove()); // ERROR?\r\n }\r\n}\r\nWhich one of the following correctly describes the behavior of this program?",
+			"answers": [
+				{
+					"text": "When executed, this program prints the following: “The removed element is: 5”",
+					"index": 1
+				},
+				{
+					"text": "When executed, this program prints the following: “The removed element is: 1”",
+					"index": 2
+				},
+				{
+					"text": "When compiled, the program results in a compiler error of “remove() returns void” for the line marked with the\r\n comment ERROR.",
+					"index": 3
+				},
+				{
+					"text": "When executed, this program throws InvalidOperationException.",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 2,
+			"explanation": "When executed, this program prints the following: “The removed element is: 1”.\r\nThe remove() method is equivalent to the removeFirst() method, which removes the first element (head of the\r\nqueue) of the Deque object. "
+		},
+		{
+			"text": "import java.util.*;\r\nclass Diamond {\r\n public static void main(String[] args) {\r\n List list1 = new ArrayList<>(Arrays.asList(1, \"two\", 3.0)); // ONE\r\n List list2 = new LinkedList<>\r\n (Arrays.asList(new Integer(1), new Float(2.0F), new Double(3.0))); // TWO\r\n list1 = list2; // THREE\r\n for(Object element : list1) {\r\n System.out.print(element + \" \");\r\n }\r\n }\r\n}\r\nWhich one of the following describes the expected behavior of this program?",
+			"answers": [
+				{
+					"text": "The program results in compiler error in line marked with comment ONE.",
+					"index": 1
+				},
+				{
+					"text": "The program results in compiler error in line marked with comment TWO",
+					"index": 2
+				},
+				{
+					"text": "The program results in compiler error in line marked with comment THREE.",
+					"index": 3
+				},
+				{
+					"text": "When executed, the program prints 1 2.0 3.0.",
+					"index": 4
+				},
+				{
+					"text": "When executed, this program throws a ClassCastException",
+					"index": 5
+				}
+			],
+			"indexSuccesQuestion": 4,
+			"explanation": "When executed, the program prints the following: 1 2.0 3.0.\r\nThe List is a generic type that is used here in raw form; hence it allows us to put different types of values in list2.\r\nTherefore, it prints the following: 1 2.0 3.0"
+		},
+		{
+			"text": "class SimpleCounter<T> {\r\n private static int count = 0;\r\n public SimpleCounter() {\r\n count++;\r\n }\r\n static int getCount() {\r\n return count;\r\n }\r\n}\r\nclass CounterTest {\r\n public static void main(String []args) {\r\n SimpleCounter<Double> doubleCounter = new SimpleCounter<Double>();\r\n SimpleCounter<Integer> intCounter = null;\r\n SimpleCounter rawCounter = new SimpleCounter(); // RAW\r\n System.out.println(\"SimpleCounter<Double> counter is \"\r\n + doubleCounter.getCount());\r\n System.out.println(\"SimpleCounter<Integer> counter is \" + intCounter.getCount());\r\n System.out.println(\"SimpleCounter counter is \" + rawCounter.getCount());\r\n }\r\n}\r\nWhich one of the following describes the expected behavior of this program?",
+			"answers": [
+				{
+					"text": "This program will result in a compiler error in the line marked with comment RAW",
+					"index": 1
+				},
+				{
+					"text": "When executed, this program will print\r\n SimpleCounter<Double> counter is 1\r\n SimpleCounter<Integer> counter is 0\r\n SimpleCounter counter is 1",
+					"index": 2
+				},
+				{
+					"text": "When executed, this program will print\r\n SimpleCounter<Double> counter is 1\r\n SimpleCounter<Integer> counter is 1\r\n SimpleCounter counter is 1",
+					"index": 3
+				},
+				{
+					"text": "When executed, this program will print\r\n SimpleCounter<Double> counter is 2\r\n SimpleCounter<Integer> counter is 0\r\n SimpleCounter counter is 2",
+					"index": 4
+				},
+				{
+					"text": "When executed, this program will print\r\n SimpleCounter<Double> counter is 2\r\n SimpleCounter<Integer> counter is 2\r\n SimpleCounter counter is 2",
+					"index": 5
+				}
+			],
+			"indexSuccesQuestion": 5,
+			"explanation": "When executed, this program will print\r\nSimpleCounter<Double> counter is 2\r\nSimpleCounter<Integer> counter is 2\r\nSimpleCounter counter is 2\r\nCount is a static variable, so it belongs to the class and not to an instance. Each time constructor is invoked,\r\ncount is incremented. Since two instances are created, the count value is two."
+		},
+		{
+			"text": "class UsePrintf{\r\n public static void main(String []args) {\r\n int c = 'a';\r\n float f = 10;\r\n long ell = 100L;\r\n System.out.printf(\"char val is %c, float val is %f, long int val is %ld \\n\", c, f, ell);\r\n }\r\n}\r\nWhich one of the following options best describes the behavior of this program when executed?",
+			"answers": [
+				{
+					"text": "The program prints the following: char val is a, float val is 10.000000, long int val is 100.",
+					"index": 1
+				},
+				{
+					"text": "The program prints the following: char val is 65, float val is 10.000000, long int val is 100.",
+					"index": 2
+				},
+				{
+					"text": "The program prints the following: char val is a, float val is 10, long int val is 100L",
+					"index": 3
+				},
+				{
+					"text": "The program prints the following: char val is 65, float val is 10.000000, long int val is 100L.",
+					"index": 4
+				},
+				{
+					"text": "The program prints the following: char val is 65, float val is 10, long int val is 100L.",
+					"index": 5
+				},
+				{
+					"text": "The program throws an exception of java.util.UnknownFormatConversionException: Conversion = 'l'.",
+					"index": 6
+				}
+			],
+			"indexSuccesQuestion": 6,
+			"explanation": "The program throws an exception for java.util.UnknownFormatConversionException: Conversion = 'l'\r\nThere is no format specifier for long int, and the same %d format specifier for int is used for long as well. So, the\r\nformat specifier %ld results in a runtime exception UnknownFormatConversionException."
+		},
+		{
+			"text": "import java.util.regex.Pattern;\r\nclass Split {\r\n public static void main(String []args) {\r\n String date = \"10-01-2012\"; // 10th January 2012 in dd-mm-yyyy format\r\n String [] dateParts = date.split(\"-\");\r\n System.out.print(\"Using String.split method: \");\r\n for(String part : dateParts) {\r\n System.out.print(part + \" \");\r\n }\r\n System.out.print(\"\\nUsing regex pattern: \");\r\n Pattern datePattern = Pattern.compile(\"-\");\r\n dateParts = datePattern.split(date);\r\n for(String part : dateParts) {\r\n System.out.print(part + \" \");\r\n }\r\n }\r\n}",
+			"answers": [
+				{
+					"text": "Using String.split method: 10-01-2012\r\nUsing regex pattern: 10 01 2012",
+					"index": 1
+				},
+				{
+					"text": "Using String.split method: 10 01 2012\r\nUsing regex pattern: 10 01 2012",
+					"index": 2
+				},
+				{
+					"text": "Using String.split method: 10-01-2012\r\nUsing regex pattern: 10-01-2012",
+					"index": 3
+				},
+				{
+					"text": "Using String.split method:\r\nUsing regex pattern: 10 01 2012",
+					"index": 4
+				},
+				{
+					"text": "Using String.split method: 10 01 2012\r\nUsing regex pattern:",
+					"index": 5
+				},
+				{
+					"text": "Using String.split method:\r\nUsing regex pattern:",
+					"index": 6
+				}
+			],
+			"indexSuccesQuestion": 6,
+			"explanation": "Using String.split method: 10 01 2012\r\nUsing regex pattern: 10 01 2012\r\nUsing str.split(regex) is equivalent to using Pattern.compile(regex).split(str)"
+		},
+		{
+			"text": "import java.util.regex.Pattern;\r\nclass Regex {\r\n public static void main(String []args) {\r\n String pattern = \"a*b+c{3}\";\r\n String []strings = { \"abc\", \"abbccc\", \"aabbcc\", \"aaabbbccc\" };\r\n for(String str : strings) {\r\n System.out.print(Pattern.matches(pattern, str) + \" \");\r\n }\r\n }\r\n}\r\nWhich one of the following options correctly shows the output of this program?",
+			"answers": [
+				{
+					"text": "true true true true",
+					"index": 1
+				},
+				{
+					"text": "true false false false",
+					"index": 2
+				},
+				{
+					"text": "true false true false2",
+					"index": 3
+				},
+				{
+					"text": "false true false true",
+					"index": 4
+				},
+				{
+					"text": "false false false true",
+					"index": 5
+				},
+				{
+					"text": "false false false false",
+					"index": 6
+				}
+			],
+			"indexSuccesQuestion": 4,
+			"explanation": "false true false true\r\nHere are the following regular expression matches for the character x:\r\n•\t x* means matches with x for zero or more times.\r\n•\t x+ means matches with x for one or more times.\r\n•\t x{n} means match x exactly n times. \r\nThe pattern a*b+c{3} means match a zero or more times, followed by b one or more times, and c exactly\r\nthree times.\r\nSo, here is the match for elements in the strings array:\r\n\u2022\t For \"abc\", the match fails, resulting in false.\r\n\u2022\t For \"abbccc\", the match succeeds, resulting in true.\r\n\u2022\t For \"aabbcc\", the match fails, resulting in false.\r\n\u2022\t For \"aaabbbccc\", the match succeeds, resulting in true."
+		},
+		{
+			"text": "class MatchCheck {\r\n public static void main(String []args) {\r\n String[]strings = {\"Severity 1\", \"severity 2\", \"severity3\",\r\n\"severity five\"};\r\n for(String str : strings) {\r\n if(!str.matches(\"^severity[\\\\s+][1–5]\")) {\r\n System.out.println(str + \" does not match\");\r\n }\r\n }\r\n }\r\n}\r\n\r\nWhich one of the following options correctly shows the output of this program?",
+			"answers": [
+				{
+					"text": "Severity 1 does not match\r\nseverity 2 does not match\r\nseverity five does not match",
+					"index": 1
+				},
+				{
+					"text": "severity3 does not match\r\nseverity five does not match",
+					"index": 2
+				},
+				{
+					"text": "Severity 1 does not match\r\nseverity 2 does not match",
+					"index": 3
+				},
+				{
+					"text": "Severity 1 does not match\r\nseverity3 does not match\r\nseverity five does not match",
+					"index": 4
+				}
+			],
+			"indexSuccesQuestion": 4,
+			"explanation": "Severity 1 does not match.\r\nseverity3 does not match.\r\nseverity five does not match.\r\nHere is the meaning of the patterns used:\r\n[^xyz] Any character except x, y, or z (i.e., negation)\r\n\\s A whitespace character\r\n[a-z] from a to z\r\nSo the pattern \"^severity[\\\\s+][1–5]\" matches the string “severity” followed by whitespace followed by one\r\nof the letters 1 to 5.\r\nFor this pattern,\r\n•\t “Severity 1” does not match because of the capital S in “Severity”.\r\n•\t “severity 2” matches.\r\n•\t “severity3” does not match since there is no whitespace between severity and 3.\r\n•\t “severity five” does not match since “five” does not match a numeral from 1 to 5."
+		}
+	]
 }
