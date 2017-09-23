@@ -1,23 +1,27 @@
 {
-				"text" : "Consider the following program:\r\n\r\nclass StrEqual {\r\n\r\n\tpublic static void main(String []args) {\r\n\t\tString s1 = \"hi\";\r\n\t\tString s2 = new String(\"hi\");\r\n\t\tString s3 = \"hi\";\r\n\t \r\n\t\tif(s1 == s2) {\r\n\t\t\tSystem.out.println(\"s1 and s2 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and s2 not equal\");\r\n\t\t}\r\n\t \r\n\t\tif(s1 == s3) {\r\n\t\tSystem.out.println(\"s1 and and s3 equal\");\r\n\t\t} else {\r\n\t\t\tSystem.out.println(\"s1 and and s3 not equal\");\r\n\t\t}\r\n\t}\r\n}\r\n",
+				"text" : "import java.util.*;\r\nclass Separate {\r\n public static void main(String []args) {\r\n String text = \"<head>first program <\/head> <body>hello world<\/body>\";\r\n Set<String> words = new TreeSet<>();\r\n try ( Scanner tokenizingScanner = new Scanner(text) ) {\r\n tokenizingScanner.useDelimiter(\"\\\\W\");\r\n while(tokenizingScanner.hasNext()) {\r\n String word = tokenizingScanner.next();\r\n if(!word.trim().equals(\"\")) {\r\n words.add(word);\r\n }\r\n }\r\n }\r\n for(String word : words) {\r\n System.out.print(word + \" \");\r\n }\r\n }\r\n}\r\n\r\nWhich one of the following options correctly provides the output of this program?",
 				"answers" :[
 					{
-						"text": "s1 and s2 equal\r\ns1 and s3 equal",
+						"text": "hello body program head first world",
 						"index": 1
 					},
 					{
-						"text": "s1 and s2 equal\r\ns1 and s3 not equal",
+						"text": "body first head hello program world",
 						"index": 2
 					},
 					{
-						"text": "s1 and s2 not equal\r\ns1 and s3 equal",
+						"text": "head first program head body hello world body",
 						"index": 3
 					},
 					{
-						"text": "s1 and s2 not equal\r\ns1 and s3 not equal",
+						"text": "head first program body hello world",
 						"index": 4
+					},
+					{
+						"text": "< </ >",
+						"index": 5
 					}
 				],
-				"indexSuccesQuestion" : 3,
-				"explanation": "JVM sets a constant pool in which it stores all the string constants used in the type. If two references are\r\ndeclared with a constant, then both refer to the same constant object. The == operator checks the similarity of\r\nobjects itself (and not the values in it). Here, the first comparison is between two distinct objects, so we get s1\r\nand s2 not equal. On the other hand, since references of s1 and s3 refer to the same object, we get s1 and\r\ns3 equal."
+				"indexSuccesQuestion" : 2,
+				"explanation": "body first head hello program world\r\nTreeSet<String> orders the strings in default alphabetical ascending order and removes duplicates. The\r\ndelimiter \\W is non-word, so the characters such as < act as separators."
 			}

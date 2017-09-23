@@ -627,6 +627,168 @@
 			],
 			"indexSuccesQuestion": 4,
 			"explanation": "Severity 1 does not match.\r\nseverity3 does not match.\r\nseverity five does not match.\r\nHere is the meaning of the patterns used:\r\n[^xyz] Any character except x, y, or z (i.e., negation)\r\n\\s A whitespace character\r\n[a-z] from a to z\r\nSo the pattern \"^severity[\\\\s+][1–5]\" matches the string “severity” followed by whitespace followed by one\r\nof the letters 1 to 5.\r\nFor this pattern,\r\n•\t “Severity 1” does not match because of the capital S in “Severity”.\r\n•\t “severity 2” matches.\r\n•\t “severity3” does not match since there is no whitespace between severity and 3.\r\n•\t “severity five” does not match since “five” does not match a numeral from 1 to 5."
-		}
+		},
+		{
+			"text": "import java.lang.*;\r\nclass InvalidValueException extends IllegalArgumentException {}\r\nclass InvalidKeyException extends IllegalArgumentException {}\r\nclass BaseClass {\r\n void foo() throws IllegalArgumentException {\r\n throw new IllegalArgumentException();\r\n }\r\n}\r\nclass DeriClass extends BaseClass {\r\n public void foo() throws IllegalArgumentException {\r\n throw new InvalidValueException();\r\n }\r\n}\r\nclass DeriDeriClass extends DeriClass {\r\n public void foo() { // LINE A\r\n throw new InvalidKeyException();\r\n }\r\n}\nclass EHTest {\r\n public static void main(String []args) {\r\n try {\r\n BaseClass base = new DeriDeriClass();\r\n base.foo();\r\n } catch(RuntimeException e) {\r\n System.out.println(e);\r\n }\r\n }\r\n}\r\nWhich one of the following options correctly describes the behavior of this program?",
+			"answers": [
+				{
+					"text": "The program prints the following: InvalidKeyException.",
+					"index": 1
+				},
+				{
+					"text": "The program prints the following: RuntimeException",
+					"index": 2
+				},
+				{
+					"text": "The program prints the following: IllegalArgumentException.",
+					"index": 3
+				},
+				{
+					"text": "The program prints the following: InvalidValueException",
+					"index": 4
+				},
+				{
+					"text": "When compiled, the program will result in a compiler error in line marked with comment Line A due to missing throws clause.",
+					"index": 5
+				}
+			],
+			"indexSuccesQuestion": 1,
+			"explanation": "The program prints the following: InvalidKeyException.\r\nIt is not necessary to provide an Exception thrown by a method when the method is overriding a method defined\r\nwith an exception (using the throws clause). Hence, the given program will compile successfully and it will print\r\nInvalidKeyException."
+		},
+		{
+			"text": "class EHBehavior {\r\n public static void main(String []args) {\r\n try {\r\n int i = 10/0; // LINE A\r\n System.out.print(\"after throw -> \");\r\n } catch(ArithmeticException ae) {\r\n System.out.print(\"in catch -> \");\r\n return;\r\n } finally {\r\n System.out.print(\"in finally -> \");\r\n }\r\n System.out.print(\"after everything\");\r\n }\r\n}\r\nWhich one of the following options best describes the behavior of this program?",
+			"answers": [
+			   {
+				  "text": "The program prints the following: in catch -> in finally -> after everything",
+				  "index": 1
+			   },
+			   {
+				  "text": "The program prints the following: after throw -> in catch -> in finally -> after everything",
+				  "index": 2
+			   },
+			   {
+				  "text": "The program prints the following: in catch -> in finally -> after everything.",
+				  "index": 3
+			   },
+			   {
+				  "text": "The program prints the following: in catch -> after everything",
+				  "index": 4
+			   },
+			   {
+				  "text": "The program prints the following: in catch -> in finally ->.",
+				  "index": 5
+			   },
+			   {
+				  "text": "When compiled, the program results in a compiler error in line marked with comment in LINE A for divide-by-zero",
+				  "index": 6
+			   }
+			],
+			"indexSuccesQuestion": 5,
+			"explanation": "The statement println(\"after throw -> \"); will never be executed since the line marked with the comment\r\nLINE A throws an exception. The catch handles ArithmeticException, so println(\"in catch -> \"); will be\r\nexecuted. Following that, there is a return statement, so the function returns. But before the function returns, the\r\nfinally statement should be called, hence the statement println(\"in finally -> \"); will get executed. So,\r\nthe statement println(\"after everything\"); will never get executed."
+		 },
+		 {
+			"text": "class AssertionFailure {\r\n public static void main(String []args) {\r\n try {\r\n assert false;\r\n } catch(RuntimeException re) {\r\n System.out.println(\"RuntimeException\");\r\n } catch(Exception e) {\r\n System.out.println(\"Exception\");\r\n } catch(Error e) { // LINE A\r\n System.out.println(\"Error\" + e);\r\n } catch(Throwable t) {\r\n System.out.println(\"Throwable\");\r\n }\r\n }\r\n}\r\nThis program is invoked in command line as follows:\r\njava AssertionFailure",
+			"answers": [
+			   {
+				  "text": "Compiler error at line marked with comment LINE A",
+				  "index": 1
+			   },
+			   {
+				  "text": "Prints “RuntimeException” in console",
+				  "index": 2
+			   },
+			   {
+				  "text": "Prints “Exception”",
+				  "index": 3
+			   },
+			   {
+				  "text": "Prints “Error”",
+				  "index": 4
+			   },
+			   {
+				  "text": "Prints “Throwable”",
+				  "index": 5
+			   },
+			   {
+				  "text": "Does not print any output on console",
+				  "index": 6
+			   }
+			],
+			"indexSuccesQuestion": 6,
+			"explanation": "Does not print any output on the console\r\nBy default, assertions are disabled. If -ea (or the -enableassertions option to enable assertions), then\r\nthe program would have printed “Error” since the exception thrown in the case of assertion failure is\r\njava.lang.AssertionError, which is derived from the Error class."
+		 },
+		 {
+			"text": "import java.io.*;\r\nclass CreateFilesInFolder {\r\n public static void main(String []args) {\r\n String[] fileList = { \"/file1.txt\", \"/subdir/file2.txt\", \"/file3.txt\" };\r\n for (String file : fileList) {\r\n try {\r\n new File(file).mkdirs();\r\n }\r\n catch (Exception e) {\r\n System.out.println(\"file creation failed\");\r\n System.exit(−1);\r\n }\r\n }\r\n }\r\n}\r\n\r\nAssume that underlying file system has necessary permissions to create files, and that the program executed\r\nsuccessfully without printing the message “file creation failed.” (In the answers, note that the term “current\r\ndirectory” means the directory from which you execute this program, and the term “root directory” in Windows\r\nOS means the root path of the current drive from which you execute this program.) What is the most likely\r\nbehavior when you execute this program?",
+			"answers": [
+			   {
+				  "text": "This program will create file1.txt and file3.txt files in the current directory, and file2.txt file in the subdir directory of the current directory.",
+				  "index": 1
+			   },
+			   {
+				  "text": "This program will create file1.txt and file3.txt directories in the current directory and the file2.txt directory in the\r\n “subdir” directory in the current directory.",
+				  "index": 2
+			   },
+			   {
+				  "text": "This program will create file1.txt and file3.txt files in the root directory, and a file2.txt file in the “subdir” directory in\r\n the root directory",
+				  "index": 3
+			   },
+			   {
+				  "text": "This program will create file1.txt and file3.txt directories in the root directory, and a file2.txt directory in the\r\n “subdir” directory in the root directory.",
+				  "index": 4
+			   }
+			],
+			"indexSuccesQuestion": 4,
+			"explanation": "This program will create file1.txt and file3.txt directories in the root directory, and a file2.txt directory in the\r\n “subdir” directory in the root directory.\r\nThe mkdirs() method creates a directory for the given name. Since the file names have / in them, the method\r\ncreates directories in the root directory (or root path for the Windows drive based on the path in which you\r\nexecute this program)."
+		 },
+		 {
+			"text": "Which of the following statement is true regarding object serialization in Java? ",
+			"answers": [
+			   {
+				  "text": "A serializable interface declares two methods, readObject() and writeObject(). To support serialization in\r\n your class, you need to implement the Serializable interface and define these two methods",
+				  "index": 1
+			   },
+			   {
+				  "text": "When serializing an object that has references to other objects, the serialization mechanism also includes the\r\n referenced objects as part of the serialized bytes. \nIf you attempt to serialize or persist an object that does not implement the Externalizable interface, you’ll get a\r\n NotExternalizableException.",
+				  "index": 2
+			   },
+			   {
+				  "text": "When an object is serialized, the class members that are declared as transient will not be serialized (and hence\r\n their values are lost after deserialization).",
+				  "index": 3
+			   },
+			   {
+				  "text": "The Externalizable interface is a marker interface; in other words, it’s an empty interface that does not declare\r\n any methods.",
+				  "index": 4
+			   }
+			],
+			"indexSuccesQuestion": 2,
+			"explanation": "When serializing an object that has references to other objects, the serialization mechanism also includes the\r\n referenced objects as part of the serialized bytes.\r\n and\r\n When an object is serialized, the class members that are declared as transient will not be serialized (and hence\r\n their values are lost after deserialization).\r\nAre true regarding object serialization."
+		 },
+		 {
+			"text": "import java.util.*;\r\nclass Separate {\r\n public static void main(String []args) {\r\n String text = \"<head>first program <\/head> <body>hello world<\/body>\";\r\n Set<String> words = new TreeSet<>();\r\n try ( Scanner tokenizingScanner = new Scanner(text) ) {\r\n tokenizingScanner.useDelimiter(\"\\\\W\");\r\n while(tokenizingScanner.hasNext()) {\r\n String word = tokenizingScanner.next();\r\n if(!word.trim().equals(\"\")) {\r\n words.add(word);\r\n }\r\n }\r\n }\r\n for(String word : words) {\r\n System.out.print(word + \" \");\r\n }\r\n }\r\n}\r\n\r\nWhich one of the following options correctly provides the output of this program?",
+			"answers": [
+			   {
+				  "text": "hello body program head first world",
+				  "index": 1
+			   },
+			   {
+				  "text": "body first head hello program world",
+				  "index": 2
+			   },
+			   {
+				  "text": "head first program head body hello world body",
+				  "index": 3
+			   },
+			   {
+				  "text": "head first program body hello world",
+				  "index": 4
+			   },
+			   {
+				  "text": "< <\/ >",
+				  "index": 5
+			   }
+			],
+			"indexSuccesQuestion": 2,
+			"explanation": "body first head hello program world\r\nTreeSet<String> orders the strings in default alphabetical ascending order and removes duplicates. The\r\ndelimiter \\W is non-word, so the characters such as < act as separators."
+		 }
 	]
 }
