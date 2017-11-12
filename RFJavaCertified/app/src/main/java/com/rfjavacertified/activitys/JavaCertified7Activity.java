@@ -71,7 +71,7 @@ public class JavaCertified7Activity extends AppCompatActivity {
     }
 
     private void initTest(){
-        File root = RFUtilsFile.getRootFolder(IConstantesApp.APP_NAME);
+        File root = RFUtilsFile.getRootFolderContext(IConstantesApp.APP_NAME,this);
         File fileJson = null;
 
         if (root != null && root.isDirectory()) {

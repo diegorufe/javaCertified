@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     private void init() {
 
-        RFUtilsFile.createFolderApp(IConstantesApp.APP_NAME);
+        RFUtilsFile.createFolderApp(IConstantesApp.APP_NAME, this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recileview_certifieds);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
