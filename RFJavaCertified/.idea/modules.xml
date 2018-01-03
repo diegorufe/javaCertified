@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/RFJavaCertified.iml" filepath="$PROJECT_DIR$/RFJavaCertified.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../media/RFAndroid/RFMediaCore/rfMediaModuleCore/rfMediaMdouleCore.iml" filepath="$PROJECT_DIR$/../../media/RFAndroid/RFMediaCore/rfMediaModuleCore/rfMediaMdouleCore.iml" />
+      <module fileurl="file://E:\trabajo\repos\media\RFAndroid\RFMediaCore\rfMediaModuleCore\rfMediaMdouleCore.iml" filepath="E:\trabajo\repos\media\RFAndroid\RFMediaCore\rfMediaModuleCore\rfMediaMdouleCore.iml" />
     </modules>
   </component>
 </project>
